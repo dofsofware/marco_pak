@@ -7,6 +7,13 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
+        "pack": "Pack",
+        "assureur": "Assureur",
+        "assure": "Assure",
+        "ps": "PS",
+        "rendezVous": "Rendez Vous",
+        "rapportSoignant": "Rapport Soignant",
+        "rapportPharmacien": "Rapport Pharmacien",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

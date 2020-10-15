@@ -141,7 +141,7 @@ jhipster:
   #     allow-credentials: true
   #     max-age: 1800
   mail:
-    from: FirstCaring@localhost
+    from: contact@tech-xel.com
   swagger:
     default-include-pattern: /api/.*
     title: FirstCaring API

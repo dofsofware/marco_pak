@@ -1,0 +1,79 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="firstCaringApp.rapportSoignant.home.title">Rapport Soignants</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-rapport-soignant" [routerLink]="['/rapport-soignant/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="firstCaringApp.rapportSoignant.home.createLabel">
+            Create a new Rapport Soignant
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="rapportSoignants?.length === 0">
+        <span jhiTranslate="firstCaringApp.rapportSoignant.home.notFound">No rapportSoignants found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="rapportSoignants && rapportSoignants.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="codePatient"><span jhiTranslate="firstCaringApp.rapportSoignant.codePatient">Code Patient</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="codePS"><span jhiTranslate="firstCaringApp.rapportSoignant.codePS">Code PS</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="facturation"><span jhiTranslate="firstCaringApp.rapportSoignant.facturation">Facturation</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span jhiTranslate="firstCaringApp.rapportSoignant.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdAt"><span jhiTranslate="firstCaringApp.rapportSoignant.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rapportSoignant of rapportSoignants ;trackBy: trackId">
+                    <td><a [routerLink]="['/rapport-soignant', rapportSoignant.id, 'view']">{{ rapportSoignant.id }}</a></td>
+                    <td>{{ rapportSoignant.codePatient }}</td>
+                    <td>{{ rapportSoignant.codePS }}</td>
+                    <td>{{ rapportSoignant.facturation }}</td>
+                    <td>{{ rapportSoignant.description }}</td>
+                    <td>{{ rapportSoignant.createdAt | date:'medium' }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/rapport-soignant', rapportSoignant.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/rapport-soignant', rapportSoignant.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(rapportSoignant)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="rapportSoignants && rapportSoignants.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

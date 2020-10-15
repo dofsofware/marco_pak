@@ -1,0 +1,26 @@
+{
+  "firstCaringApp": {
+    "rapportPharmacien": {
+      "home": {
+        "title": "RapportPharmaciens",
+        "createLabel": "Créer un nouveau Rapport Pharmacien",
+        "createOrEditLabel": "Créer ou éditer un Rapport Pharmacien",
+        "notFound": "Aucun Rapport Pharmacien trouvé"
+      },
+      "created": "Un nouveau Rapport Pharmacien a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Rapport Pharmacien avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Rapport Pharmacien avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Rapport Pharmacien {{ id }} ?"
+      },
+      "detail": {
+        "title": "Rapport Pharmacien"
+      },
+      "codePatient": "Code Patient",
+      "codePS": "Code PS",
+      "facturation": "Facturation",
+      "description": "Description",
+      "createdAt": "Created At"
+    }
+  }
+}

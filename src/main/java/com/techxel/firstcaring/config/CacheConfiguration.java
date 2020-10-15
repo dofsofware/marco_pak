@@ -48,6 +48,17 @@ public class CacheConfiguration {
             createCache(cm, com.techxel.firstcaring.domain.User.class.getName());
             createCache(cm, com.techxel.firstcaring.domain.Authority.class.getName());
             createCache(cm, com.techxel.firstcaring.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.techxel.firstcaring.domain.Pack.class.getName());
+            createCache(cm, com.techxel.firstcaring.domain.Assureur.class.getName());
+            createCache(cm, com.techxel.firstcaring.domain.Assureur.class.getName() + ".assures");
+            createCache(cm, com.techxel.firstcaring.domain.Assure.class.getName());
+            createCache(cm, com.techxel.firstcaring.domain.Assure.class.getName() + ".assureurs");
+            createCache(cm, com.techxel.firstcaring.domain.Assure.class.getName() + ".ps");
+            createCache(cm, com.techxel.firstcaring.domain.PS.class.getName());
+            createCache(cm, com.techxel.firstcaring.domain.PS.class.getName() + ".assures");
+            createCache(cm, com.techxel.firstcaring.domain.RendezVous.class.getName());
+            createCache(cm, com.techxel.firstcaring.domain.RapportSoignant.class.getName());
+            createCache(cm, com.techxel.firstcaring.domain.RapportPharmacien.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

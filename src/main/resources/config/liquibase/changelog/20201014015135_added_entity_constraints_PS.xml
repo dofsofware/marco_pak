@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity PS.
+    -->
+    <changeSet id="20201014015135-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="ps"
+                                 constraintName="fk_ps_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="ps_id"
+                                 baseTableName="ps_assure"
+                                 constraintName="fk_ps_assure_ps_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ps"/>
+
+        <addForeignKeyConstraint baseColumnNames="assure_id"
+                                 baseTableName="ps_assure"
+                                 constraintName="fk_ps_assure_assure_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="assure"/>
+        
+    </changeSet>
+</databaseChangeLog>

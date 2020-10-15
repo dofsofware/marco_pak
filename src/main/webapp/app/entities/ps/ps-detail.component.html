@@ -1,0 +1,80 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pS">
+            <h2><span jhiTranslate="firstCaringApp.pS.detail.title">PS</span> {{ pS.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="firstCaringApp.pS.codePS">Code PS</span></dt>
+                <dd>
+                    <span>{{ pS.codePS }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.profil">Profil</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'firstCaringApp.Profil.' + pS.profil }}">{{ pS.profil }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{ pS.telephone }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.createdAt">Created At</span></dt>
+                <dd>
+                    <span>{{ pS.createdAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.urlPhoto">Url Photo</span></dt>
+                <dd>
+                    <span>{{ pS.urlPhoto }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.profession">Profession</span></dt>
+                <dd>
+                    <span>{{ pS.profession }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.experience">Experience</span></dt>
+                <dd>
+                    <span>{{ pS.experience }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.nomDeLetablissement">Nom De Letablissement</span></dt>
+                <dd>
+                    <span>{{ pS.nomDeLetablissement }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.telephoneDeLetablissement">Telephone De Letablissement</span></dt>
+                <dd>
+                    <span>{{ pS.telephoneDeLetablissement }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.adresseDeLetablissement">Adresse De Letablissement</span></dt>
+                <dd>
+                    <span>{{ pS.adresseDeLetablissement }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.lienGoogleMapsDeLetablissement">Lien Google Maps De Letablissement</span></dt>
+                <dd>
+                    <span>{{ pS.lienGoogleMapsDeLetablissement }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.user">User</span></dt>
+                <dd>
+                    {{ pS.user?.id }}
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pS.assure">Assure</span></dt>
+                <dd>
+                    <span *ngFor="let assure of pS.assures; let last = last">
+                        <a [routerLink]="['/assure', assure?.id, 'view']">{{ assure.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/ps', pS.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

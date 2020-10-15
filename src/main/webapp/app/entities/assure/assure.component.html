@@ -1,0 +1,97 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="firstCaringApp.assure.home.title">Assures</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-assure" [routerLink]="['/assure/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="firstCaringApp.assure.home.createLabel">
+            Create a new Assure
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="assures?.length === 0">
+        <span jhiTranslate="firstCaringApp.assure.home.notFound">No assures found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="assures && assures.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="codeAssure"><span jhiTranslate="firstCaringApp.assure.codeAssure">Code Assure</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="profil"><span jhiTranslate="firstCaringApp.assure.profil">Profil</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="telephone"><span jhiTranslate="firstCaringApp.assure.telephone">Telephone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdAt"><span jhiTranslate="firstCaringApp.assure.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="urlPhoto"><span jhiTranslate="firstCaringApp.assure.urlPhoto">Url Photo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="adresse"><span jhiTranslate="firstCaringApp.assure.adresse">Adresse</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="user.id"><span jhiTranslate="firstCaringApp.assure.user">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="assureur.id"><span jhiTranslate="firstCaringApp.assure.assureur">Assureur</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="pack.id"><span jhiTranslate="firstCaringApp.assure.pack">Pack</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let assure of assures ;trackBy: trackId">
+                    <td><a [routerLink]="['/assure', assure.id, 'view']">{{ assure.id }}</a></td>
+                    <td>{{ assure.codeAssure }}</td>
+                    <td jhiTranslate="{{ 'firstCaringApp.Profil.' + assure.profil }}">{{ assure.profil }}</td>
+                    <td>{{ assure.telephone }}</td>
+                    <td>{{ assure.createdAt | date:'medium' }}</td>
+                    <td>{{ assure.urlPhoto }}</td>
+                    <td>{{ assure.adresse }}</td>
+                    <td>
+                        {{ assure.user?.id }}
+                    </td>
+                    <td>
+                        <div *ngIf="assure.assureur">
+                            <a [routerLink]="['/assureur', assure.assureur?.id, 'view']" >{{ assure.assureur?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="assure.pack">
+                            <a [routerLink]="['/pack', assure.pack?.id, 'view']" >{{ assure.pack?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/assure', assure.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/assure', assure.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(assure)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="assures && assures.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+{
+  "name": "Pack",
+  "fields": [
+    {
+      "fieldName": "denommination",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "prix",
+      "fieldType": "Double",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "nmbDePers",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20201014014835",
+  "entityTableName": "pack",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

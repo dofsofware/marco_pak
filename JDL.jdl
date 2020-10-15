@@ -1,0 +1,87 @@
+entity Pack {
+	denommination String required,
+    prix Double required,
+    description TextBlob,
+    nmbDePers Integer required
+}
+
+entity Assureur {
+    codeAssureur String required unique minlength(4) maxlength(20),
+	profil Profil required,
+	telephone String required,
+    createdAt ZonedDateTime required,
+    urlPhoto String,
+    adresse String required minlength(4) maxlength(200),
+}
+
+entity Assure {
+    codeAssure String required unique minlength(4) maxlength(20),
+	profil Profil required,
+	telephone String required minlength(7),
+    createdAt ZonedDateTime required,
+    urlPhoto String,
+    adresse String required minlength(4) maxlength(200),
+}
+
+entity PS {
+    codePS String required unique minlength(4) maxlength(20),
+	profil Profil required,
+	telephone String required,
+    createdAt ZonedDateTime required,
+    urlPhoto String,
+    profession String required minlength(4),
+    experience Integer max(30) required,
+    nomDeLetablissement String required minlength(4) maxlength(200),
+    telephoneDeLetablissement String required,
+    adresseDeLetablissement String required minlength(4) maxlength(200),
+    lienGoogleMapsDeLetablissement String minlength(100) maxlength(600),
+}
+
+enum Profil {
+    ASSUREUR, ASSURE, PS
+}
+
+entity RendezVous {
+	codePatient String required minlength(4) maxlength(20),
+	codePS String required minlength(4) maxlength(20),
+    debutRV ZonedDateTime required,
+    finRV ZonedDateTime required,
+    createdAt ZonedDateTime required,
+}
+
+entity RapportSoignant {
+	codePatient String required minlength(4) maxlength(20),
+	codePS String required minlength(4) maxlength(20),
+    facturation Double required,
+    description TextBlob,
+    createdAt ZonedDateTime required,
+}
+
+entity RapportPharmacien {
+	codePatient String required minlength(4) maxlength(20),
+	codePS String required minlength(4) maxlength(20),
+    facturation Double required,
+    description TextBlob,
+    createdAt ZonedDateTime required,
+}
+
+relationship OneToOne {
+	Assureur{user} to User,
+	PS{user} to User,
+	Assure{user} to User,
+}
+
+relationship ManyToOne {
+	Assure{assureur} to Assureur,
+	Assure{pack} to Pack,
+}
+
+// defining multiple OneToMany relationships with comments
+relationship ManyToMany {
+	Assureur{assure} to Assure{assureur},
+	PS{assure} to Assure{ps},
+}
+
+paginate all with pagination
+// Set service options to all except few
+service all with serviceImpl

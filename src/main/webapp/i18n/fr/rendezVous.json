@@ -1,0 +1,26 @@
+{
+  "firstCaringApp": {
+    "rendezVous": {
+      "home": {
+        "title": "RendezVous",
+        "createLabel": "Créer un nouveau Rendez Vous",
+        "createOrEditLabel": "Créer ou éditer un Rendez Vous",
+        "notFound": "Aucun Rendez Vous trouvé"
+      },
+      "created": "Un nouveau Rendez Vous a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Rendez Vous avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Rendez Vous avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Rendez Vous {{ id }} ?"
+      },
+      "detail": {
+        "title": "Rendez Vous"
+      },
+      "codePatient": "Code Patient",
+      "codePS": "Code PS",
+      "debutRV": "Debut RV",
+      "finRV": "Fin RV",
+      "createdAt": "Created At"
+    }
+  }
+}

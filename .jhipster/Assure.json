@@ -1,0 +1,107 @@
+{
+  "name": "Assure",
+  "fields": [
+    {
+      "fieldName": "codeAssure",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "unique",
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": "4",
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "profil",
+      "fieldType": "Profil",
+      "fieldValues": "ASSUREUR,ASSURE,PS",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "minlength"
+      ],
+      "fieldValidateRulesMinlength": "7"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "urlPhoto",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": "4",
+      "fieldValidateRulesMaxlength": "200"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "assure",
+      "relationshipName": "user",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "assureur",
+      "otherEntityRelationshipName": "assure",
+      "relationshipName": "assureur",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "pack",
+      "otherEntityRelationshipName": "assure",
+      "relationshipName": "pack",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "assureur",
+      "otherEntityRelationshipName": "assure",
+      "relationshipName": "assureur",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "pS",
+      "otherEntityRelationshipName": "assure",
+      "relationshipName": "ps",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20201014015035",
+  "entityTableName": "assure",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

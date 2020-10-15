@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pack">
+            <h2><span jhiTranslate="firstCaringApp.pack.detail.title">Pack</span> {{ pack.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="firstCaringApp.pack.denommination">Denommination</span></dt>
+                <dd>
+                    <span>{{ pack.denommination }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pack.prix">Prix</span></dt>
+                <dd>
+                    <span>{{ pack.prix }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pack.description">Description</span></dt>
+                <dd>
+                    <span>{{ pack.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.pack.nmbDePers">Nmb De Pers</span></dt>
+                <dd>
+                    <span>{{ pack.nmbDePers }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pack', pack.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

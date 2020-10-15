@@ -1,0 +1,29 @@
+{
+  "firstCaringApp": {
+    "assureur": {
+      "home": {
+        "title": "Assureurs",
+        "createLabel": "Créer un nouveau Assureur",
+        "createOrEditLabel": "Créer ou éditer un Assureur",
+        "notFound": "Aucun Assureur trouvé"
+      },
+      "created": "Un nouveau Assureur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Assureur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Assureur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Assureur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Assureur"
+      },
+      "codeAssureur": "Code Assureur",
+      "profil": "Profil",
+      "telephone": "Telephone",
+      "createdAt": "Created At",
+      "urlPhoto": "Url Photo",
+      "adresse": "Adresse",
+      "user": "User",
+      "assure": "Assure"
+    }
+  }
+}

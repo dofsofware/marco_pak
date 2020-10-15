@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="assure">
+            <h2><span jhiTranslate="firstCaringApp.assure.detail.title">Assure</span> {{ assure.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="firstCaringApp.assure.codeAssure">Code Assure</span></dt>
+                <dd>
+                    <span>{{ assure.codeAssure }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assure.profil">Profil</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'firstCaringApp.Profil.' + assure.profil }}">{{ assure.profil }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assure.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{ assure.telephone }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assure.createdAt">Created At</span></dt>
+                <dd>
+                    <span>{{ assure.createdAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assure.urlPhoto">Url Photo</span></dt>
+                <dd>
+                    <span>{{ assure.urlPhoto }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assure.adresse">Adresse</span></dt>
+                <dd>
+                    <span>{{ assure.adresse }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assure.user">User</span></dt>
+                <dd>
+                    {{ assure.user?.id }}
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assure.assureur">Assureur</span></dt>
+                <dd>
+                    <div *ngIf="assure.assureur">
+                        <a [routerLink]="['/assureur', assure.assureur?.id, 'view']">{{ assure.assureur?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assure.pack">Pack</span></dt>
+                <dd>
+                    <div *ngIf="assure.pack">
+                        <a [routerLink]="['/pack', assure.pack?.id, 'view']">{{ assure.pack?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/assure', assure.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

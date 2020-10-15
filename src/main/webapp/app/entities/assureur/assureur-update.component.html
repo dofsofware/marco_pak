@@ -1,0 +1,131 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-assureur-heading" jhiTranslate="firstCaringApp.assureur.home.createOrEditLabel">Create or edit a Assureur</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.assureur.codeAssureur" for="field_codeAssureur">Code Assureur</label>
+                    <input type="text" class="form-control" name="codeAssureur" id="field_codeAssureur"
+                           formControlName="codeAssureur"/>
+                    <div *ngIf="editForm.get('codeAssureur')!.invalid && (editForm.get('codeAssureur')!.dirty || editForm.get('codeAssureur')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codeAssureur')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codeAssureur')?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                        This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codeAssureur')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.assureur.profil" for="field_profil">Profil</label>
+                    <select class="form-control" name="profil" formControlName="profil" id="field_profil">
+                        <option value="ASSUREUR">{{ 'firstCaringApp.Profil.ASSUREUR' | translate }}</option>
+                        <option value="ASSURE">{{ 'firstCaringApp.Profil.ASSURE' | translate }}</option>
+                        <option value="PS">{{ 'firstCaringApp.Profil.PS' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('profil')!.invalid && (editForm.get('profil')!.dirty || editForm.get('profil')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('profil')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.assureur.telephone" for="field_telephone">Telephone</label>
+                    <input type="text" class="form-control" name="telephone" id="field_telephone"
+                           formControlName="telephone"/>
+                    <div *ngIf="editForm.get('telephone')!.invalid && (editForm.get('telephone')!.dirty || editForm.get('telephone')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('telephone')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.assureur.createdAt" for="field_createdAt">Created At</label>
+                    <div class="d-flex">
+                        <input id="field_createdAt" type="datetime-local" class="form-control" name="createdAt" formControlName="createdAt" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('createdAt')!.invalid && (editForm.get('createdAt')!.dirty || editForm.get('createdAt')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('createdAt')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('createdAt')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.assureur.urlPhoto" for="field_urlPhoto">Url Photo</label>
+                    <input type="text" class="form-control" name="urlPhoto" id="field_urlPhoto"
+                           formControlName="urlPhoto"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.assureur.adresse" for="field_adresse">Adresse</label>
+                    <input type="text" class="form-control" name="adresse" id="field_adresse"
+                           formControlName="adresse"/>
+                    <div *ngIf="editForm.get('adresse')!.invalid && (editForm.get('adresse')!.dirty || editForm.get('adresse')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('adresse')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('adresse')?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                        This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('adresse')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                        This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.assureur.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" formControlName="user">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="firstCaringApp.assureur.assure" for="field_assures">Assure</label>
+                    <select class="form-control" id="field_assures" multiple name="assures" formControlName="assures">
+                        <option [ngValue]="getSelected(editForm.get('assures')!.value, assureOption)" *ngFor="let assureOption of assures; trackBy: trackById">{{ assureOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

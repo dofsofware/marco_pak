@@ -1,0 +1,26 @@
+{
+  "firstCaringApp": {
+    "rapportSoignant": {
+      "home": {
+        "title": "RapportSoignants",
+        "createLabel": "Créer un nouveau Rapport Soignant",
+        "createOrEditLabel": "Créer ou éditer un Rapport Soignant",
+        "notFound": "Aucun Rapport Soignant trouvé"
+      },
+      "created": "Un nouveau Rapport Soignant a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Rapport Soignant avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Rapport Soignant avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Rapport Soignant {{ id }} ?"
+      },
+      "detail": {
+        "title": "Rapport Soignant"
+      },
+      "codePatient": "Code Patient",
+      "codePS": "Code PS",
+      "facturation": "Facturation",
+      "description": "Description",
+      "createdAt": "Created At"
+    }
+  }
+}

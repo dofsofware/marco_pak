@@ -1,0 +1,34 @@
+{
+  "firstCaringApp": {
+    "pS": {
+      "home": {
+        "title": "PS",
+        "createLabel": "Créer un nouveau PS",
+        "createOrEditLabel": "Créer ou éditer un PS",
+        "notFound": "Aucun PS trouvé"
+      },
+      "created": "Un nouveau PS a été créé avec l'identifiant {{ param }}",
+      "updated": "Le PS avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le PS avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le PS {{ id }} ?"
+      },
+      "detail": {
+        "title": "PS"
+      },
+      "codePS": "Code PS",
+      "profil": "Profil",
+      "telephone": "Telephone",
+      "createdAt": "Created At",
+      "urlPhoto": "Url Photo",
+      "profession": "Profession",
+      "experience": "Experience",
+      "nomDeLetablissement": "Nom De Letablissement",
+      "telephoneDeLetablissement": "Telephone De Letablissement",
+      "adresseDeLetablissement": "Adresse De Letablissement",
+      "lienGoogleMapsDeLetablissement": "Lien Google Maps De Letablissement",
+      "user": "User",
+      "assure": "Assure"
+    }
+  }
+}

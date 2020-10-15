@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="assureur">
+            <h2><span jhiTranslate="firstCaringApp.assureur.detail.title">Assureur</span> {{ assureur.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="firstCaringApp.assureur.codeAssureur">Code Assureur</span></dt>
+                <dd>
+                    <span>{{ assureur.codeAssureur }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assureur.profil">Profil</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'firstCaringApp.Profil.' + assureur.profil }}">{{ assureur.profil }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assureur.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{ assureur.telephone }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assureur.createdAt">Created At</span></dt>
+                <dd>
+                    <span>{{ assureur.createdAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assureur.urlPhoto">Url Photo</span></dt>
+                <dd>
+                    <span>{{ assureur.urlPhoto }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assureur.adresse">Adresse</span></dt>
+                <dd>
+                    <span>{{ assureur.adresse }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assureur.user">User</span></dt>
+                <dd>
+                    {{ assureur.user?.id }}
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.assureur.assure">Assure</span></dt>
+                <dd>
+                    <span *ngFor="let assure of assureur.assures; let last = last">
+                        <a [routerLink]="['/assure', assure?.id, 'view']">{{ assure.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/assureur', assureur.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

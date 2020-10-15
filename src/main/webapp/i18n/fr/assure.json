@@ -1,0 +1,32 @@
+{
+  "firstCaringApp": {
+    "assure": {
+      "home": {
+        "title": "Assures",
+        "createLabel": "Créer un nouveau Assure",
+        "createOrEditLabel": "Créer ou éditer un Assure",
+        "notFound": "Aucun Assure trouvé"
+      },
+      "created": "Un nouveau Assure a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Assure avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Assure avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Assure {{ id }} ?"
+      },
+      "detail": {
+        "title": "Assure"
+      },
+      "codeAssure": "Code Assure",
+      "profil": "Profil",
+      "telephone": "Telephone",
+      "createdAt": "Created At",
+      "urlPhoto": "Url Photo",
+      "adresse": "Adresse",
+      "user": "User",
+      "assureur": "Assureur",
+      "pack": "Pack",
+      "assureur": "Assureur",
+      "ps": "Ps"
+    }
+  }
+}

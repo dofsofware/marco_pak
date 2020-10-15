@@ -1,0 +1,83 @@
+{
+  "name": "Assureur",
+  "fields": [
+    {
+      "fieldName": "codeAssureur",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "unique",
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": "4",
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "profil",
+      "fieldType": "Profil",
+      "fieldValues": "ASSUREUR,ASSURE,PS",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "urlPhoto",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": "4",
+      "fieldValidateRulesMaxlength": "200"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "assureur",
+      "relationshipName": "user",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "assure",
+      "otherEntityRelationshipName": "assureur",
+      "relationshipName": "assure",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20201014014935",
+  "entityTableName": "assureur",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
