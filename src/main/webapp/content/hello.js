@@ -5,6 +5,3 @@ window.onload=function() {
         alert('Hello, world!');
     }
 }
-// $(document).ready(function(){
-//     alert('Hello, world!');
-// });
