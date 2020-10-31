@@ -55,7 +55,7 @@ spring:
     contexts: dev, faker
   mail:
     host: mail45.lwspanel.com
-    port: 993
+    port: 587
     username: contact@tech-xel.com
     password: Ouzinaramouzlayassctd2@simvas
     protocol: smtp

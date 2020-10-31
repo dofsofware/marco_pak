@@ -1,6 +1,7 @@
 node_modules/
 src/main/docker/
 src/test/javascript/protractor.conf.js
+src/main/webapp/content/assets/js
 src/test/javascript/jest.conf.js
 webpack/
 target/
