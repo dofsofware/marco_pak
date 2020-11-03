@@ -8,6 +8,12 @@
   -webkit-tap-highlight-color: transparent;
   position: relative;
 }
+.owl-carousel .owl-stage,
+.owl-carousel.owl-drag .owl-item {
+  -ms-touch-action: pan-y !important;
+  touch-action: pan-y !important;
+}
+
 .owl-carousel {
   display: none;
   width: 100%;

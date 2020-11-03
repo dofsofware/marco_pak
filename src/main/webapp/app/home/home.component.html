@@ -14,6 +14,7 @@
             </div>
         </div>
       </div>
+      
 
       <div class="slider-item" style="background-image:url(../../content/assets/images/bg_2.jpg);">
           <div class="overlay"></div>
@@ -138,7 +139,18 @@
 </div>
 </section>
 
+<!-- <div [ngSwitch]="isAuthenticated()">
+  <div class="alert alert-success" *ngSwitchCase="true">
+      <span *ngIf="account" jhiTranslate="home.logged.message"
+          translateValues="{username: '{{account.login}}'}"> You are logged in as user "{{account.login}}". </span>
+  </div>
 
+
+  <div  *ngSwitchCase="true">
+     <jhi-pack-update>Loading top 10 customers...</jhi-pack-update>
+  </div>
+
+</div> -->
 
 <!-- <section class="ftco-section">
     <div class="container">
