@@ -212,9 +212,9 @@
 <div class="wrap">
     <div class="container">
         <div class="row justify-content-between">
-            <div class="col-md-3 mb-md-0 mb-4 d-flex align-items-center">
-                <a class="navbar-brand" href="index.html">FirstCaring</a> 
-            </div>
+            <a href="" class="col-md-3 mb-md-0 mb-4 d-flex align-items-center" style="background-image:url(../../../content/assets/images/logo\ first\ carring.png);background-size:contain;background-repeat: no-repeat;">
+                <!-- <a class="navbar-brand" href="index.html"></a>  -->
+            </a>
             <div class="col-md-7">
                 <div class="row">
                     <div class="col-md-8 mb-md-0 mb-3">
@@ -243,10 +243,14 @@
             aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="fa fa-bars"></span> Menu
         </button>
-        <div class="order-lg-last">
-            <a href="#" class="btn btn-primary dropdown-item" (click)="login()" id="login">
+        <div class="order-lg-last" [ngSwitch]="isAuthenticated()">
+            <a href="#" *ngSwitchCase="false" class="btn btn-primary dropdown-item" (click)="login()" id="login">
                 <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.account.login">Sign in</span>
+            </a>
+            <a href="#" *ngSwitchCase="true" class="btn btn-primary dropdown-item" (click)="logout()" id="logout">
+                <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.account.logout">Sign out</span>
             </a>
             <!-- <div *ngSwitchCase="true">
         <a class="btn btn-primary" (click)="logout()" id="logout">
