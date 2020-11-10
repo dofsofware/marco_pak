@@ -1,4 +1,4 @@
-<!-- <nav class="navbar navbar-dark navbar-expand-md bg-dark">
+<nav class="navbar navbar-dark navbar-expand-md bg-dark">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
         <span class="logo-img"></span>
         <span jhiTranslate="global.title" class="navbar-title">FirstCaring</span> <span class="navbar-version">{{ version }}</span>
@@ -185,7 +185,7 @@
             </li>
         </ul>
     </div>
-</nav> -->
+</nav>
 
 <!-- MY NAVBAR DEBUT -->
 <div class="top py-1">
@@ -290,6 +290,12 @@
                     <a class="nav-link" routerLinkActive="active"
                         [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                         <span>CONTACT</span>
+                    </a>
+                </li>
+                <li class="nav-item" [ngSwitch]="isAuthenticated()">
+                    <a class="nav-link" routerLinkActive="active" *ngSwitchCase="true"
+                        [routerLinkActiveOptions]="{ exact: true }" (click)="profil()">
+                        <span>PROFIL</span>
                     </a>
                 </li>
                 <!-- <li class="nav-item">

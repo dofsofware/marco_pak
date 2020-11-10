@@ -1,0 +1,286 @@
+<div class="img"
+    style="    background-image:  url(../../../content/assets/images/background-profil.jpg);height: 350px;background-size: cover;">
+</div>
+<div class="card social-prof">
+    <div class="card-body">
+        <div class="wrapper">
+        </div>
+        
+        <img src="../../../content/assets/images/profile.jpg" alt="" class="user-profile">
+        <h3>{{account.firstName}} {{account.lastName}}</h3>
+        <p>{{account.email}}</p>
+        <div class="row ">
+            <div class="col-lg-12">
+                <ul class=" nav nav-tabs justify-content-center s-nav">
+                    <!-- <li><a class="active" href="#">Timeline</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Friends</a></li>
+                    <li><a href="#">Photos</a></li>
+                    <li><a href="#">Videos</a></li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="accordion mt-5" id="accordionExample">
+				<div class="card">
+					<div class="card-header" id="headingOne" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						<h2 class="clearfix mb-0">
+							<span>Historique de mes paiements</span>
+							<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fa fa-plus-circle"></i></button>
+						</h2>
+					</div>
+					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+						<div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Vestibulum id metus ac nisl bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet sagittis. In tincidunt orci sit amet elementum vestibulum.</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingTwo" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						<h2 class="mb-0">
+							<span>Liste de mes assurés</span>
+							<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-plus-circle"></i></button>
+						</h2>
+					</div>
+					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+						<div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingThree" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+						<h2 class="mb-0">
+							<span>Ajouter un assuré</span>
+							<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fa fa-plus-circle"></i></button>
+						</h2>
+					</div>
+					<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+						<div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Vestibulum id metus ac nisl bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet sagittis. In tincidunt orci sit amet elementum vestibulum.</div>
+					</div>
+				</div>
+				<div class="card" *ngIf="false">
+					<div class="card-header" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" id="headingFour">
+						<h2 class="mb-0">
+							<span>Collapsible Group Item #4</span>
+							<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><i class="fa fa-plus-circle"></i></button>
+						</h2>
+					</div>
+					<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+						<div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br><br><br>
+
+<!-- <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 jhiTranslate="settings.title" [translateValues]="{ username: account.login }" *ngIf="account">User
+                settings for [<b>{{ account.login }}</b>]</h2>
+
+            <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
+                <strong>Settings saved!</strong>
+            </div>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <form name="form" role="form" (ngSubmit)="save()" [formGroup]="settingsForm" *ngIf="account" novalidate>
+                <div class="form-group">
+                    <label class="form-control-label" for="firstName" jhiTranslate="settings.form.firstname">First
+                        Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName"
+                        placeholder="{{ 'settings.form.firstname.placeholder' | translate }}"
+                        formControlName="firstName">
+
+                    <div
+                        *ngIf="settingsForm.get('firstName')!.invalid && (settingsForm.get('firstName')!.dirty || settingsForm.get('firstName')!.touched)">
+                        <small class="form-text text-danger" *ngIf="settingsForm.get('firstName')?.errors?.required"
+                            jhiTranslate="settings.messages.validate.firstname.required">
+                            Your first name is required.
+                        </small>
+
+                        <small class="form-text text-danger" *ngIf="settingsForm.get('firstName')?.errors?.minlength"
+                            jhiTranslate="settings.messages.validate.firstname.minlength">
+                            Your first name is required to be at least 1 character.
+                        </small>
+
+                        <small class="form-text text-danger" *ngIf="settingsForm.get('firstName')?.errors?.maxlength"
+                            jhiTranslate="settings.messages.validate.firstname.maxlength">
+                            Your first name cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="lastName" jhiTranslate="settings.form.lastname">Last
+                        Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName"
+                        placeholder="{{ 'settings.form.lastname.placeholder' | translate }}" formControlName="lastName">
+
+                    <div
+                        *ngIf="settingsForm.get('lastName')!.invalid && (settingsForm.get('lastName')!.dirty || settingsForm.get('lastName')!.touched)">
+                        <small class="form-text text-danger" *ngIf="settingsForm.get('lastName')?.errors?.required"
+                            jhiTranslate="settings.messages.validate.lastname.required">
+                            Your last name is required.
+                        </small>
+
+                        <small class="form-text text-danger" *ngIf="settingsForm.get('lastName')?.errors?.minlength"
+                            jhiTranslate="settings.messages.validate.lastname.minlength">
+                            Your last name is required to be at least 1 character.
+                        </small>
+
+                        <small class="form-text text-danger" *ngIf="settingsForm.get('lastName')?.errors?.maxlength"
+                            jhiTranslate="settings.messages.validate.lastname.maxlength">
+                            Your last name cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="email" jhiTranslate="global.form.email.label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                        placeholder="{{ 'global.form.email.placeholder' | translate }}" formControlName="email">
+
+                    <div
+                        *ngIf="settingsForm.get('email')!.invalid && (settingsForm.get('email')!.dirty || settingsForm.get('email')!.touched)">
+                        <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.required"
+                            jhiTranslate="global.messages.validate.email.required">
+                            Your email is required.
+                        </small>
+
+                        <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.email"
+                            jhiTranslate="global.messages.validate.email.invalid">
+                            Your email is invalid.
+                        </small>
+
+                        <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.minlength"
+                            jhiTranslate="global.messages.validate.email.minlength">
+                            Your email is required to be at least 5 characters.
+                        </small>
+
+                        <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.maxlength"
+                            jhiTranslate="global.messages.validate.email.maxlength">
+                            Your email cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group" *ngIf="languages && languages.length > 0">
+                    <label for="langKey" jhiTranslate="settings.form.language">Language</label>
+                    <select class="form-control" id="langKey" name="langKey" formControlName="langKey">
+                        <option *ngFor="let language of languages" [value]="language">{{ language | findLanguageFromKey }}</option>
+                    </select>
+                </div>
+
+
+
+                <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary"
+                    jhiTranslate="settings.form.button">Save</button>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+
+<!-- <section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8 text-center heading-section ">
+                <span class="subheading">Services</span>
+                <h2 class="mb-4">Why Choose Us?</h2>
+                <p>Separated they live in. A small river named Duden flows by their place and supplies it with the
+                    necessary regelialia. It is a paradisematic country</p>
+            </div>
+        </div>
+        <div class="row tabulation mt-4 ">
+            <div class="col-md-4">
+                <ul class="nav nav-pills nav-fill d-md-flex d-block flex-column">
+                    <li class="nav-item text-left">
+                        <a class="nav-link active py-4" data-toggle="tab" href="#services-1"><span
+                                class="flaticon-chiropractic mr-2"></span> Spinal Manupulation</a>
+                    </li>
+                    <li class="nav-item text-left">
+                        <a class="nav-link py-4" data-toggle="tab" href="#services-2"><span
+                                class="flaticon-electrotherapy mr-2"></span> Electrotherapy</a>
+                    </li>
+                    <li class="nav-item text-left">
+                        <a class="nav-link py-4" data-toggle="tab" href="#services-3"><span
+                                class="flaticon-lymph-nodes mr-2"></span> Manual Lympahtic</a>
+                    </li>
+                    <li class="nav-item text-left">
+                        <a class="nav-link py-4" data-toggle="tab" href="#services-4"><span
+                                class="flaticon-acupuncture mr-2"></span> Medical Acupuncture</a>
+                    </li>
+                    <li class="nav-item text-left">
+                        <a class="nav-link py-4" data-toggle="tab" href="#services-5"><span
+                                class="flaticon-examination mr-2"></span> Therapeutic Exercise</a>
+                    </li>
+                    <li class="nav-item text-left">
+                        <a class="nav-link py-4" data-toggle="tab" href="#services-6"><span
+                                class="flaticon-bone mr-2"></span> Joint Mobilization</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content">
+                    <div class="tab-pane container p-0 active" id="services-1">
+                        <div class="img" style="background-image: url(../../../content/assets/images/work-2.jpg);">
+                        </div>
+                        <h3><a href="#">Spinal Manupulation</a></h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
+                            Semantics, a large language ocean.</p>
+                    </div>
+                    <div class="tab-pane container p-0 fade" id="services-2">
+                        <div class="img" style="background-image: url(../../../content/assets/images/work-3.jpg);">
+                        </div>
+                        <h3><a href="#">Electrotherapy</a></h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
+                            Semantics, a large language ocean.</p>
+                    </div>
+                    <div class="tab-pane container p-0 fade" id="services-3">
+                        <div class="img" style="background-image: url(../../../content/assets/images/work-4.jpg);">
+                        </div>
+                        <h3><a href="#">Manual Lymphatic</a></h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
+                            Semantics, a large language ocean.</p>
+                    </div>
+                    <div class="tab-pane container p-0 fade" id="services-4">
+                        <div class="img" style="background-image: url(../../../content/assets/images/work-5.jpg);">
+                        </div>
+                        <h3><a href="#">Medical Acupuncture</a></h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
+                            Semantics, a large language ocean.</p>
+                    </div>
+                    <div class="tab-pane container p-0 fade" id="services-5">
+                        <div class="img" style="background-image: url(../../../content/assets/images/work-6.jpg);">
+                        </div>
+                        <h3><a href="#">Therapeutic Exercise</a></h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
+                            Semantics, a large language ocean.</p>
+                    </div>
+                    <div class="tab-pane container p-0 fade" id="services-6">
+                        <div class="img" style="background-image: url(../../../content/assets/images/work-1.jpg);">
+                        </div>
+                        <h3><a href="#">Joint Mobilization</a></h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
+                            Semantics, a large language ocean.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+

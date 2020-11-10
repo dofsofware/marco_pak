@@ -32,6 +32,10 @@ import { RouterModule } from '@angular/router';
         path: 'rapport-pharmacien',
         loadChildren: () => import('./rapport-pharmacien/rapport-pharmacien.module').then(m => m.FirstCaringRapportPharmacienModule),
       },
+      {
+        path: 'profil',
+        loadChildren: () => import('./profil/profil.module').then(m => m.FirstCaringProfilModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

@@ -12,6 +12,5 @@ import { packRoute } from './pack.route';
   imports: [FirstCaringSharedModule, RouterModule.forChild(packRoute)],
   declarations: [PackComponent, PackDetailComponent, PackUpdateComponent, PackDeleteDialogComponent],
   entryComponents: [PackDeleteDialogComponent],
-  exports: [PackUpdateComponent],
 })
 export class FirstCaringPackModule {}

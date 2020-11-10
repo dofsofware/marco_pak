@@ -56,6 +56,7 @@ export class LoginModalComponent implements AfterViewInit {
           ) {
             this.router.navigate(['']);
           }
+          this.router.navigate(['/profil']);
         },
         () => (this.authenticationError = true)
       );

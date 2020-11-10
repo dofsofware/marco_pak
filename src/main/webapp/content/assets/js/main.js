@@ -166,12 +166,12 @@
 
 	var contentWayPoint = function() {
 		var i = 0;
+		
 		$('.ftco-animate').waypoint( function( direction ) {
-
+			
 			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
 				
 				i++;
-
 				$(this.element).addClass('item-animate');
 				setTimeout(function(){
 
@@ -399,7 +399,7 @@ $(document).ready(function() {
 		var contentWayPoint = function() {
 			var i = 0;
 			$('.ftco-animate').waypoint( function( direction ) {
-	
+				
 				if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
 					
 					i++;
@@ -430,6 +430,7 @@ $(document).ready(function() {
 	
 			} , { offset: '95%' } );
 		};
+
 		contentWayPoint();
 	
 	
@@ -437,6 +438,50 @@ $(document).ready(function() {
 		  'format': 'm/d/yyyy',
 		  'autoclose': true
 		});
-	
+		
 		$('.appointment_time').timepicker();
+		// Add minus icon for collapse element which is open by default
+		$(".collapse.show").each(function(){
+			$(this).siblings(".card-header").find(".btn i").addClass("fa-minus-circle").removeClass("fa-plus-circle");
+		});
+	
+		// Toggle plus minus icon on show hide of collapse element
+		$(".collapse").on('show.bs.collapse', function(){
+			$(this).parent().find(".card-header .btn i").removeClass("fa-plus-circle").addClass("fa-minus-circle");
+		}).on('hide.bs.collapse', function(){
+			$(this).parent().find(".card-header .btn i").removeClass("fa-minus-circle").addClass("fa-plus-circle");
+		});
+
+
+		var deferredPrompt;
+
+		window.addEventListener('beforeinstallprompt', function (e) {
+			// Prevent Chrome 67 and earlier from automatically showing the prompt
+			e.preventDefault();
+			// Stash the event so it can be triggered later.
+			deferredPrompt = e;
+	
+			showAddToHomeScreen();
+		});
+	
+		function showAddToHomeScreen() {
+			var addPWABtn = document.querySelector(".add-pwa");
+			addPWABtn.style.display = "block";
+			addPWABtn.addEventListener("click", addToHomeScreen);
+		};
+	
+		function addToHomeScreen() {
+			var addPWABtn = document.querySelector(".add-pwa");  // hide our user interface that shows our A2HS button
+			addPWABtn.style.display = 'none';  // Show the prompt
+			deferredPrompt.prompt();  // Wait for the user to respond to the prompt
+			deferredPrompt.userChoice
+			.then(function (choiceResult) {
+				if (choiceResult.outcome === 'accepted') {
+					console.log('User accepted the prompt');
+				} else {
+					console.log('User dismissed the prompt');
+				}
+				deferredPrompt = null;
+			});
+		};
   })
