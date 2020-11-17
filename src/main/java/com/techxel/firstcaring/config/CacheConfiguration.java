@@ -59,6 +59,11 @@ public class CacheConfiguration {
             createCache(cm, com.techxel.firstcaring.domain.RendezVous.class.getName());
             createCache(cm, com.techxel.firstcaring.domain.RapportSoignant.class.getName());
             createCache(cm, com.techxel.firstcaring.domain.RapportPharmacien.class.getName());
+            createCache(cm, com.techxel.firstcaring.domain.Facture.class.getName());
+            createCache(cm, com.techxel.firstcaring.domain.Facture.class.getName() + ".ps");
+            createCache(cm, com.techxel.firstcaring.domain.Facture.class.getName() + ".assureurs");
+            createCache(cm, com.techxel.firstcaring.domain.Assureur.class.getName() + ".factures");
+            createCache(cm, com.techxel.firstcaring.domain.PS.class.getName() + ".factures");
             // jhipster-needle-ehcache-add-entry
         };
     }

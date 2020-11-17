@@ -29,7 +29,7 @@
 			if($('#ftco-loader').length > 0) {
 				$('#ftco-loader').removeClass('show');
 			}
-		}, 1);
+		}, 500);
 	};
 	loader();
 
@@ -261,7 +261,7 @@ $(document).ready(function() {
 				if($('#ftco-loader').length > 0) {
 					$('#ftco-loader').removeClass('show');
 				}
-			}, 1);
+			}, 500);
 		};
 		loader();
 	
@@ -484,4 +484,8 @@ $(document).ready(function() {
 				deferredPrompt = null;
 			});
 		};
+		var focusScrollMethod = function getFocus() {          
+			document.getElementById("positionDuModal").focus({preventScroll:false});
+			alert("test");
+		  }
   })

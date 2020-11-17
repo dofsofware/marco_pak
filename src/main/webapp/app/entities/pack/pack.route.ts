@@ -40,7 +40,6 @@ export const packRoute: Routes = [
     component: PackComponent,
     data: {
       authorities: [Authority.USER],
-      defaultSort: 'id,asc',
       pageTitle: 'firstCaringApp.pack.home.title',
     },
     canActivate: [UserRouteAccessService],

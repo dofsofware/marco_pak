@@ -36,6 +36,14 @@ import { RouterModule } from '@angular/router';
         path: 'profil',
         loadChildren: () => import('./profil/profil.module').then(m => m.FirstCaringProfilModule),
       },
+      {
+        path: 'facture',
+        loadChildren: () => import('./facture/facture.module').then(m => m.FirstCaringFactureModule),
+      },
+      {
+        path: 'contact',
+        loadChildren: () => import('./contact/contact.module').then(m => m.FirstCaringContactModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

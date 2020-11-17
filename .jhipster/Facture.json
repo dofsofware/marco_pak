@@ -1,0 +1,53 @@
+{
+  "name": "Facture",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "prix",
+      "fieldType": "Double",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "pS",
+      "otherEntityRelationshipName": "facture",
+      "relationshipName": "ps",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "assureur",
+      "otherEntityRelationshipName": "facture",
+      "relationshipName": "assureur",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "assure",
+      "otherEntityRelationshipName": "facture",
+      "relationshipName": "assure",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201110165107",
+  "entityTableName": "facture",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -21,10 +21,12 @@
     <include file="config/liquibase/changelog/20201014015235_added_entity_RendezVous.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201014015335_added_entity_RapportSoignant.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201014015435_added_entity_RapportPharmacien.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201110165107_added_entity_Facture.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20201014014935_added_entity_constraints_Assureur.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201014015035_added_entity_constraints_Assure.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20201014015135_added_entity_constraints_PS.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201110165107_added_entity_constraints_Facture.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

@@ -40,7 +40,6 @@ export const assureurRoute: Routes = [
     component: AssureurComponent,
     data: {
       authorities: [Authority.USER],
-      defaultSort: 'id,asc',
       pageTitle: 'firstCaringApp.assureur.home.title',
     },
     canActivate: [UserRouteAccessService],

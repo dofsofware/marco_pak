@@ -5,6 +5,11 @@ entity Pack {
     nmbDePers Integer required
 }
 
+entity Facture {
+	date ZonedDateTime required,
+    prix Double required,
+}
+
 entity Assureur {
     codeAssureur String required unique minlength(4) maxlength(20),
 	profil Profil required,
@@ -74,6 +79,9 @@ relationship OneToOne {
 relationship ManyToOne {
 	Assure{assureur} to Assureur,
 	Assure{pack} to Pack,
+	Facture{ps} to PS,
+	Facture{assureur} to Assureur,
+	Facture{assure} to Assure,
 }
 
 // defining multiple OneToMany relationships with comments
@@ -82,6 +90,6 @@ relationship ManyToMany {
 	PS{assure} to Assure{ps},
 }
 
-paginate all with pagination
+paginate all with infinite-scroll
 // Set service options to all except few
 service all with serviceImpl

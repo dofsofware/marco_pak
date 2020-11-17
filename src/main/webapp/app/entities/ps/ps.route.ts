@@ -40,7 +40,6 @@ export const pSRoute: Routes = [
     component: PSComponent,
     data: {
       authorities: [Authority.USER],
-      defaultSort: 'id,asc',
       pageTitle: 'firstCaringApp.pS.home.title',
     },
     canActivate: [UserRouteAccessService],

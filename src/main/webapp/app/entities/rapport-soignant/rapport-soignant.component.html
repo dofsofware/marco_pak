@@ -21,7 +21,7 @@
     <div class="table-responsive" id="entities" *ngIf="rapportSoignants && rapportSoignants.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="codePatient"><span jhiTranslate="firstCaringApp.rapportSoignant.codePatient">Code Patient</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="codePS"><span jhiTranslate="firstCaringApp.rapportSoignant.codePS">Code PS</span> <fa-icon icon="sort"></fa-icon></th>
@@ -31,7 +31,7 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
                 <tr *ngFor="let rapportSoignant of rapportSoignants ;trackBy: trackId">
                     <td><a [routerLink]="['/rapport-soignant', rapportSoignant.id, 'view']">{{ rapportSoignant.id }}</a></td>
                     <td>{{ rapportSoignant.codePatient }}</td>
@@ -65,15 +65,5 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <div *ngIf="rapportSoignants && rapportSoignants.length > 0">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
-        </div>
     </div>
 </div>

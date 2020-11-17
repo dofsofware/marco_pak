@@ -40,7 +40,6 @@ export const rendezVousRoute: Routes = [
     component: RendezVousComponent,
     data: {
       authorities: [Authority.USER],
-      defaultSort: 'id,asc',
       pageTitle: 'firstCaringApp.rendezVous.home.title',
     },
     canActivate: [UserRouteAccessService],

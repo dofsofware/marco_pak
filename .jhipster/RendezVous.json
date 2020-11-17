@@ -49,7 +49,7 @@
   "changelogDate": "20201014015235",
   "entityTableName": "rendez_vous",
   "dto": "no",
-  "pagination": "pagination",
+  "pagination": "infinite-scroll",
   "service": "serviceImpl",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

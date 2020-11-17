@@ -32,7 +32,7 @@
   "changelogDate": "20201014014835",
   "entityTableName": "pack",
   "dto": "no",
-  "pagination": "pagination",
+  "pagination": "infinite-scroll",
   "service": "serviceImpl",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

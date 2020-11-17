@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="facture">
+            <h2><span jhiTranslate="firstCaringApp.facture.detail.title">Facture</span> {{ facture.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="firstCaringApp.facture.date">Date</span></dt>
+                <dd>
+                    <span>{{ facture.date }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.facture.prix">Prix</span></dt>
+                <dd>
+                    <span>{{ facture.prix }}</span>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.facture.ps">Ps</span></dt>
+                <dd>
+                    <div *ngIf="facture.ps">
+                        <a [routerLink]="['/ps', facture.ps?.id, 'view']">{{ facture.ps?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.facture.assureur">Assureur</span></dt>
+                <dd>
+                    <div *ngIf="facture.assureur">
+                        <a [routerLink]="['/assureur', facture.assureur?.id, 'view']">{{ facture.assureur?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="firstCaringApp.facture.assure">Assure</span></dt>
+                <dd>
+                    <div *ngIf="facture.assure">
+                        <a [routerLink]="['/assure', facture.assure?.id, 'view']">{{ facture.assure?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/facture', facture.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

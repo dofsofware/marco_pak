@@ -47,7 +47,7 @@
   "changelogDate": "20201014015335",
   "entityTableName": "rapport_soignant",
   "dto": "no",
-  "pagination": "pagination",
+  "pagination": "infinite-scroll",
   "service": "serviceImpl",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

@@ -1,0 +1,83 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-facture-heading" jhiTranslate="firstCaringApp.facture.home.createOrEditLabel">Create or edit a Facture</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.facture.date" for="field_date">Date</label>
+                    <div class="d-flex">
+                        <input id="field_date" type="datetime-local" class="form-control" name="date" formControlName="date" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('date')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('date')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.facture.prix" for="field_prix">Prix</label>
+                    <input type="number" class="form-control" name="prix" id="field_prix"
+                           formControlName="prix"/>
+                    <div *ngIf="editForm.get('prix')!.invalid && (editForm.get('prix')!.dirty || editForm.get('prix')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('prix')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('prix')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.facture.ps" for="field_ps">Ps</label>
+                    <select class="form-control" id="field_ps" name="ps" formControlName="ps">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="pSOption.id === editForm.get('ps')!.value?.id ? editForm.get('ps')!.value : pSOption" *ngFor="let pSOption of ps; trackBy: trackById">{{ pSOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.facture.assureur" for="field_assureur">Assureur</label>
+                    <select class="form-control" id="field_assureur" name="assureur" formControlName="assureur">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="assureurOption.id === editForm.get('assureur')!.value?.id ? editForm.get('assureur')!.value : assureurOption" *ngFor="let assureurOption of assureurs; trackBy: trackById">{{ assureurOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.facture.assure" for="field_assure">Assure</label>
+                    <select class="form-control" id="field_assure" name="assure" formControlName="assure">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="assureOption.id === editForm.get('assure')!.value?.id ? editForm.get('assure')!.value : assureOption" *ngFor="let assureOption of assures; trackBy: trackById">{{ assureOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

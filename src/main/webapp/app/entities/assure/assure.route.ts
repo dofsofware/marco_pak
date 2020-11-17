@@ -40,7 +40,6 @@ export const assureRoute: Routes = [
     component: AssureComponent,
     data: {
       authorities: [Authority.USER],
-      defaultSort: 'id,asc',
       pageTitle: 'firstCaringApp.assure.home.title',
     },
     canActivate: [UserRouteAccessService],

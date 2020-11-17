@@ -118,7 +118,7 @@
   "changelogDate": "20201014015135",
   "entityTableName": "ps",
   "dto": "no",
-  "pagination": "pagination",
+  "pagination": "infinite-scroll",
   "service": "serviceImpl",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

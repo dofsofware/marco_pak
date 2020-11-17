@@ -72,7 +72,7 @@
   "changelogDate": "20201014014935",
   "entityTableName": "assureur",
   "dto": "no",
-  "pagination": "pagination",
+  "pagination": "infinite-scroll",
   "service": "serviceImpl",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

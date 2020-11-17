@@ -21,7 +21,7 @@
     <div class="table-responsive" id="entities" *ngIf="assureurs && assureurs.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="codeAssureur"><span jhiTranslate="firstCaringApp.assureur.codeAssureur">Code Assureur</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="profil"><span jhiTranslate="firstCaringApp.assureur.profil">Profil</span> <fa-icon icon="sort"></fa-icon></th>
@@ -33,7 +33,7 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
                 <tr *ngFor="let assureur of assureurs ;trackBy: trackId">
                     <td><a [routerLink]="['/assureur', assureur.id, 'view']">{{ assureur.id }}</a></td>
                     <td>{{ assureur.codeAssureur }}</td>
@@ -71,15 +71,5 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <div *ngIf="assureurs && assureurs.length > 0">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
-        </div>
     </div>
 </div>

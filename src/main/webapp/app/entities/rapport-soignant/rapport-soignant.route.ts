@@ -40,7 +40,6 @@ export const rapportSoignantRoute: Routes = [
     component: RapportSoignantComponent,
     data: {
       authorities: [Authority.USER],
-      defaultSort: 'id,asc',
       pageTitle: 'firstCaringApp.rapportSoignant.home.title',
     },
     canActivate: [UserRouteAccessService],

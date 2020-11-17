@@ -47,7 +47,7 @@
   "changelogDate": "20201014015435",
   "entityTableName": "rapport_pharmacien",
   "dto": "no",
-  "pagination": "pagination",
+  "pagination": "infinite-scroll",
   "service": "serviceImpl",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

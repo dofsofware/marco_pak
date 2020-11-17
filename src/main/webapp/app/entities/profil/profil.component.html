@@ -1,80 +1,296 @@
-<div class="img"
-    style="    background-image:  url(../../../content/assets/images/background-profil.jpg);height: 350px;background-size: cover;">
-</div>
+<div
+  class="img"
+  style="background-image: url(../../../content/assets/images/background-profil.jpg); height: 350px; background-size: cover"
+></div>
 <div class="card social-prof">
-    <div class="card-body">
-        <div class="wrapper">
-        </div>
-        
-        <img src="../../../content/assets/images/profile.jpg" alt="" class="user-profile">
-        <h3>{{account.firstName}} {{account.lastName}}</h3>
-        <p>{{account.email}}</p>
-        <div class="row ">
-            <div class="col-lg-12">
-                <ul class=" nav nav-tabs justify-content-center s-nav">
-                    <!-- <li><a class="active" href="#">Timeline</a></li>
+  <div class="card-body">
+    <div class="wrapper ih-item circle colored effect5">
+        <a routerLink="/account/settings">
+        <div class="img"><img src="../../../content/assets/images/profile.jpg" alt="" class=" user-profile"></div>
+        <div class="info">
+            <div class="info-back">
+                <br>
+              <h3>Modifier</h3>
+            </div>
+          </div>
+        </a>
+    </div>
+    <h3>{{ account.firstName }} {{ account.lastName }}</h3>
+    <p>{{ account.email }}</p>
+    <div class="row">
+      <div class="col-lg-12">
+        <ul class="nav nav-tabs justify-content-center s-nav">
+          <!-- <li><a class="active" href="#">Timeline</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Friends</a></li>
                     <li><a href="#">Photos</a></li>
                     <li><a href="#">Videos</a></li> -->
-                </ul>
-            </div>
-        </div>
+        </ul>
+      </div>
     </div>
+  </div>
 </div>
 <div class="container">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="accordion mt-5" id="accordionExample">
-				<div class="card">
-					<div class="card-header" id="headingOne" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-						<h2 class="clearfix mb-0">
-							<span>Historique de mes paiements</span>
-							<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fa fa-plus-circle"></i></button>
-						</h2>
-					</div>
-					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-						<div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Vestibulum id metus ac nisl bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet sagittis. In tincidunt orci sit amet elementum vestibulum.</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingTwo" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-						<h2 class="mb-0">
-							<span>Liste de mes assurés</span>
-							<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-plus-circle"></i></button>
-						</h2>
-					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-						<div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingThree" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						<h2 class="mb-0">
-							<span>Ajouter un assuré</span>
-							<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fa fa-plus-circle"></i></button>
-						</h2>
-					</div>
-					<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-						<div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Vestibulum id metus ac nisl bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet sagittis. In tincidunt orci sit amet elementum vestibulum.</div>
-					</div>
-				</div>
-				<div class="card" *ngIf="false">
-					<div class="card-header" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" id="headingFour">
-						<h2 class="mb-0">
-							<span>Collapsible Group Item #4</span>
-							<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><i class="fa fa-plus-circle"></i></button>
-						</h2>
-					</div>
-					<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-						<div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="row">
+    <div class="alert alert-warning offset-lg-1 col-lg-10">
+      <div class="text-center">
+        <span>Merci de sectionner votre profil pour compléter vos informations</span>
+      </div>
+
+      <br />
+      <div class="form-group offset-lg-4 col-lg-4">
+        <div class="dropdown show">
+          <a
+            class="btn btn-primary dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Selectionnez votre profil
+          </a>
+
+          <div class="dropdown-menu" id="MyMainMenu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item Selectprofil" (click)="changeProfil('')">Selectionnez votre profil</a>
+            <a class="dropdown-item Selectprofil" (click)="changeProfil('ASSUREUR')">Assureur</a>
+            <a class="dropdown-item Selectprofil" (click)="changeProfil('ASSURE')">Assuré(e)</a>
+            <a class="dropdown-item Selectprofil" (click)="changeProfil('PS')">Professionnel de santé</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12" *ngIf="profil === 'ASSUREUR'">formulaire Assureur</div>
+
+    <div class="col-lg-12" *ngIf="profil === 'ASSURE'">formulaire Assuré(e)</div>
+    <div class="col-lg-12" *ngIf="profil === 'PS'">formulaire Professionnel de santé</div>
+    <div class="col-lg-12" *ngIf="false">
+      <div class="accordion mt-5" id="accordionExample">
+        <div class="card">
+          <div
+            class="card-header"
+            id="headingOne"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseOne"
+            aria-expanded="false"
+            aria-controls="collapseOne"
+          >
+            <h2 class="clearfix mb-0">
+              <span>Historique de mes paiements</span>
+              <button
+                class="btn btn-link"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                <i class="fa fa-plus-circle"></i>
+              </button>
+            </h2>
+          </div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div style="padding: 10px">
+              <h2 id="page-heading">
+                <span jhiTranslate="firstCaringApp.facture.home.title">Factures</span>
+
+                <button
+                  id="jh-create-entity"
+                  class="btn btn-primary float-right jh-create-entity create-facture"
+                  [routerLink]="['/facture/new']"
+                >
+                  <fa-icon icon="plus"></fa-icon>
+                  <span jhiTranslate="firstCaringApp.facture.home.createLabel"> Create a new Facture </span>
+                </button>
+              </h2>
+
+              <jhi-alert-error></jhi-alert-error>
+
+              <jhi-alert></jhi-alert>
+
+              <div class="alert alert-warning" id="no-result" *ngIf="factures?.length === 0">
+                <span jhiTranslate="firstCaringApp.facture.home.notFound">No factures found</span>
+              </div>
+
+              <div class="table-responsive" id="entities" *ngIf="factures && factures.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                  <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                      <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                      <th scope="col" jhiSortBy="date">
+                        <span jhiTranslate="firstCaringApp.facture.date">Date</span> <fa-icon icon="sort"></fa-icon>
+                      </th>
+                      <th scope="col" jhiSortBy="prix">
+                        <span jhiTranslate="firstCaringApp.facture.prix">Prix</span> <fa-icon icon="sort"></fa-icon>
+                      </th>
+                      <th scope="col" jhiSortBy="ps.id">
+                        <span jhiTranslate="firstCaringApp.facture.ps">Ps</span> <fa-icon icon="sort"></fa-icon>
+                      </th>
+                      <th scope="col" jhiSortBy="assureur.id">
+                        <span jhiTranslate="firstCaringApp.facture.assureur">Assureur</span> <fa-icon icon="sort"></fa-icon>
+                      </th>
+                      <th scope="col" jhiSortBy="assure.id">
+                        <span jhiTranslate="firstCaringApp.facture.assure">Assure</span> <fa-icon icon="sort"></fa-icon>
+                      </th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    infinite-scroll
+                    (scrolled)="loadPage(page + 1)"
+                    [infiniteScrollDisabled]="page >= links['last']"
+                    [infiniteScrollDistance]="0"
+                  >
+                    <tr *ngFor="let facture of factures; trackBy: trackId">
+                      <td>
+                        <a [routerLink]="['/facture', facture.id, 'view']">{{ facture.id }}</a>
+                      </td>
+                      <td>{{ facture.date | date: 'medium' }}</td>
+                      <td>{{ facture.prix }}</td>
+                      <td>
+                        <div *ngIf="facture.ps">
+                          <a [routerLink]="['/ps', facture.ps?.id, 'view']">{{ facture.ps?.id }}</a>
+                        </div>
+                      </td>
+                      <td>
+                        <div *ngIf="facture.assureur">
+                          <a [routerLink]="['/assureur', facture.assureur?.id, 'view']">{{ facture.assureur?.id }}</a>
+                        </div>
+                      </td>
+                      <td>
+                        <div *ngIf="facture.assure">
+                          <a [routerLink]="['/assure', facture.assure?.id, 'view']">{{ facture.assure?.id }}</a>
+                        </div>
+                      </td>
+                      <td class="text-right">
+                        <div class="btn-group">
+                          <button type="submit" [routerLink]="['/facture', facture.id, 'view']" class="btn btn-info btn-sm">
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                          </button>
+
+                          <button type="submit" [routerLink]="['/facture', facture.id, 'edit']" class="btn btn-primary btn-sm">
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                          </button>
+
+                          <button type="submit" (click)="delete(facture)" class="btn btn-danger btn-sm">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div
+            class="card-header"
+            id="headingTwo"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            <h2 class="mb-0">
+              <span>Liste de mes assurés</span>
+              <button
+                class="btn btn-link collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                <i class="fa fa-plus-circle"></i>
+              </button>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
+              cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a
+              bird on it squid single-origin coffee nulla assumenda shoreditch et.
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div
+            class="card-header"
+            id="headingThree"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseThree"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          >
+            <h2 class="mb-0">
+              <span>Ajouter un assuré</span>
+              <button
+                class="btn btn-link collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                <i class="fa fa-plus-circle"></i>
+              </button>
+            </h2>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus,
+              dapibus nec turpis vel, semper malesuada ante. Vestibulum id metus ac nisl bibendum scelerisque non non purus. Suspendisse
+              varius nibh non aliquet sagittis. In tincidunt orci sit amet elementum vestibulum.
+            </div>
+          </div>
+        </div>
+        <div class="card" *ngIf="false">
+          <div
+            class="card-header"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseFour"
+            aria-expanded="false"
+            aria-controls="collapseFour"
+            id="headingFour"
+          >
+            <h2 class="mb-0">
+              <span>Collapsible Group Item #4</span>
+              <button
+                class="btn btn-link collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseFour"
+                aria-expanded="false"
+                aria-controls="collapseFour"
+              >
+                <i class="fa fa-plus-circle"></i>
+              </button>
+            </h2>
+          </div>
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+            <div class="card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
+              cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a
+              bird on it squid single-origin coffee nulla assumenda shoreditch et.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<br><br><br>
+<br />
 
 <!-- <div class="container">
     <div class="row justify-content-center">
@@ -185,10 +401,6 @@
     </div>
 </div> -->
 
-
-
-
-
 <!-- <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center mb-5">
@@ -283,4 +495,3 @@
         </div>
     </div>
 </section> -->
-

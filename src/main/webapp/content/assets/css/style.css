@@ -2700,7 +2700,7 @@ fieldset:disabled a.btn {
 .btn-primary:hover {
   color: #fff;
   background-color: #0069d9;
-  border-color: #0062cc;
+  border-color: #01d28e;
 }
 .btn-primary:focus,
 .btn-primary.focus {
@@ -2717,8 +2717,8 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #0062cc;
-  border-color: #005cbf;
+  background-color: #01d28e;
+  border-color: #01d28e;
 }
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -3556,6 +3556,21 @@ input[type='button'].btn-block {
   color: #16181b;
   text-decoration: none;
   background-color: #f8f9fa;
+}
+.Selectprofil:hover,
+.Selectprofil:focus {
+  color: #fdfdfd !important;
+  text-decoration: none !important;
+  background-color: #028056 !important;
+}
+.dropdown-menu > a {
+  color: #fdfdfd !important;
+}
+.dropdown-menu {
+  color: #fdfdfd !important;
+  text-decoration: none !important;
+  background-color: #2d3e50 !important;
+  border: #2d3e50 !important;
 }
 .dropdown-item.active,
 .dropdown-item:active {
@@ -5323,7 +5338,7 @@ a.badge:focus {
 a.badge-primary:hover,
 a.badge-primary:focus {
   color: #fff;
-  background-color: #0062cc;
+  background-color: #01d28e;
 }
 
 .badge-secondary {
@@ -6740,7 +6755,7 @@ a.bg-primary:hover,
 a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-  background-color: #0062cc !important;
+  background-color: #01d28e !important;
 }
 
 .bg-secondary {
@@ -13060,4 +13075,10 @@ a {
 
 .accordion .card-header:hover {
   background-color: #028056;
+}
+
+select:focus > option:checked {
+  color: white !important;
+  background: #01d28e !important;
+  background-color: #01d28e !important;
 }
