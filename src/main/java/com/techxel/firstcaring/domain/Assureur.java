@@ -13,6 +13,8 @@ import java.util.Set;
 
 import com.techxel.firstcaring.domain.enumeration.Profil;
 
+import com.techxel.firstcaring.domain.enumeration.Sexe;
+
 /**
  * A Assureur.
  */
@@ -34,15 +36,20 @@ public class Assureur implements Serializable {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "profil", nullable = false)
+    @Column(name = "profil", nullable = true)
     private Profil profil;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sexe", nullable = false)
+    private Sexe sexe;
 
     @NotNull
     @Column(name = "telephone", nullable = false)
     private String telephone;
 
     @NotNull
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = true)
     private ZonedDateTime createdAt;
 
     @Column(name = "url_photo")
@@ -97,6 +104,19 @@ public class Assureur implements Serializable {
 
     public void setProfil(Profil profil) {
         this.profil = profil;
+    }
+
+    public Sexe getSexe() {
+        return sexe;
+    }
+
+    public Assureur sexe(Sexe sexe) {
+        this.sexe = sexe;
+        return this;
+    }
+
+    public void setSexe(Sexe sexe) {
+        this.sexe = sexe;
     }
 
     public String getTelephone() {
@@ -213,6 +233,7 @@ public class Assureur implements Serializable {
             "id=" + getId() +
             ", codeAssureur='" + getCodeAssureur() + "'" +
             ", profil='" + getProfil() + "'" +
+            ", sexe='" + getSexe() + "'" +
             ", telephone='" + getTelephone() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", urlPhoto='" + getUrlPhoto() + "'" +

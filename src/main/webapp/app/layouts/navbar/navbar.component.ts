@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -9,18 +9,20 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'jhi-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['navbar.scss'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   inProduction?: boolean;
   isNavbarCollapsed = true;
   languages = LANGUAGES;
   swaggerEnabled?: boolean;
   version: string;
+  subscription!: Subscription;
 
   constructor(
     private loginService: LoginService,
@@ -32,6 +34,9 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -56,6 +61,8 @@ export class NavbarComponent implements OnInit {
 
   login(): void {
     this.loginModalService.open();
+    // eslint-disable-next-line no-console
+    console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' + window.scrollX + '/' + window.scrollY);
   }
 
   logout(): void {

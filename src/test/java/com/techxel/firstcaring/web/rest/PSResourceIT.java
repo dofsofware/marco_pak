@@ -35,6 +35,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.techxel.firstcaring.domain.enumeration.Profil;
+import com.techxel.firstcaring.domain.enumeration.Sexe;
 /**
  * Integration tests for the {@link PSResource} REST controller.
  */
@@ -49,6 +50,9 @@ public class PSResourceIT {
 
     private static final Profil DEFAULT_PROFIL = Profil.ASSUREUR;
     private static final Profil UPDATED_PROFIL = Profil.ASSURE;
+
+    private static final Sexe DEFAULT_SEXE = Sexe.MASCULIN;
+    private static final Sexe UPDATED_SEXE = Sexe.FEMININ;
 
     private static final String DEFAULT_TELEPHONE = "AAAAAAAAAA";
     private static final String UPDATED_TELEPHONE = "BBBBBBBBBB";
@@ -107,6 +111,7 @@ public class PSResourceIT {
         PS pS = new PS()
             .codePS(DEFAULT_CODE_PS)
             .profil(DEFAULT_PROFIL)
+            .sexe(DEFAULT_SEXE)
             .telephone(DEFAULT_TELEPHONE)
             .createdAt(DEFAULT_CREATED_AT)
             .urlPhoto(DEFAULT_URL_PHOTO)
@@ -128,6 +133,7 @@ public class PSResourceIT {
         PS pS = new PS()
             .codePS(UPDATED_CODE_PS)
             .profil(UPDATED_PROFIL)
+            .sexe(UPDATED_SEXE)
             .telephone(UPDATED_TELEPHONE)
             .createdAt(UPDATED_CREATED_AT)
             .urlPhoto(UPDATED_URL_PHOTO)
@@ -161,6 +167,7 @@ public class PSResourceIT {
         PS testPS = pSList.get(pSList.size() - 1);
         assertThat(testPS.getCodePS()).isEqualTo(DEFAULT_CODE_PS);
         assertThat(testPS.getProfil()).isEqualTo(DEFAULT_PROFIL);
+        assertThat(testPS.getSexe()).isEqualTo(DEFAULT_SEXE);
         assertThat(testPS.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
         assertThat(testPS.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
         assertThat(testPS.getUrlPhoto()).isEqualTo(DEFAULT_URL_PHOTO);
@@ -217,6 +224,25 @@ public class PSResourceIT {
         int databaseSizeBeforeTest = pSRepository.findAll().size();
         // set the field null
         pS.setProfil(null);
+
+        // Create the PS, which fails.
+
+
+        restPSMockMvc.perform(post("/api/ps")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(pS)))
+            .andExpect(status().isBadRequest());
+
+        List<PS> pSList = pSRepository.findAll();
+        assertThat(pSList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkSexeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = pSRepository.findAll().size();
+        // set the field null
+        pS.setSexe(null);
 
         // Create the PS, which fails.
 
@@ -376,6 +402,7 @@ public class PSResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(pS.getId().intValue())))
             .andExpect(jsonPath("$.[*].codePS").value(hasItem(DEFAULT_CODE_PS)))
             .andExpect(jsonPath("$.[*].profil").value(hasItem(DEFAULT_PROFIL.toString())))
+            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE)))
             .andExpect(jsonPath("$.[*].createdAt").value(hasItem(sameInstant(DEFAULT_CREATED_AT))))
             .andExpect(jsonPath("$.[*].urlPhoto").value(hasItem(DEFAULT_URL_PHOTO)))
@@ -420,6 +447,7 @@ public class PSResourceIT {
             .andExpect(jsonPath("$.id").value(pS.getId().intValue()))
             .andExpect(jsonPath("$.codePS").value(DEFAULT_CODE_PS))
             .andExpect(jsonPath("$.profil").value(DEFAULT_PROFIL.toString()))
+            .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE.toString()))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE))
             .andExpect(jsonPath("$.createdAt").value(sameInstant(DEFAULT_CREATED_AT)))
             .andExpect(jsonPath("$.urlPhoto").value(DEFAULT_URL_PHOTO))
@@ -453,6 +481,7 @@ public class PSResourceIT {
         updatedPS
             .codePS(UPDATED_CODE_PS)
             .profil(UPDATED_PROFIL)
+            .sexe(UPDATED_SEXE)
             .telephone(UPDATED_TELEPHONE)
             .createdAt(UPDATED_CREATED_AT)
             .urlPhoto(UPDATED_URL_PHOTO)
@@ -474,6 +503,7 @@ public class PSResourceIT {
         PS testPS = pSList.get(pSList.size() - 1);
         assertThat(testPS.getCodePS()).isEqualTo(UPDATED_CODE_PS);
         assertThat(testPS.getProfil()).isEqualTo(UPDATED_PROFIL);
+        assertThat(testPS.getSexe()).isEqualTo(UPDATED_SEXE);
         assertThat(testPS.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
         assertThat(testPS.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testPS.getUrlPhoto()).isEqualTo(UPDATED_URL_PHOTO);

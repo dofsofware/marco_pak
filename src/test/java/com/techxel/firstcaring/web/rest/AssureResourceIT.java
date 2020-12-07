@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.techxel.firstcaring.domain.enumeration.Profil;
+import com.techxel.firstcaring.domain.enumeration.Sexe;
 /**
  * Integration tests for the {@link AssureResource} REST controller.
  */
@@ -41,6 +42,9 @@ public class AssureResourceIT {
 
     private static final Profil DEFAULT_PROFIL = Profil.ASSUREUR;
     private static final Profil UPDATED_PROFIL = Profil.ASSURE;
+
+    private static final Sexe DEFAULT_SEXE = Sexe.MASCULIN;
+    private static final Sexe UPDATED_SEXE = Sexe.FEMININ;
 
     private static final String DEFAULT_TELEPHONE = "AAAAAAAAAA";
     private static final String UPDATED_TELEPHONE = "BBBBBBBBBB";
@@ -78,6 +82,7 @@ public class AssureResourceIT {
         Assure assure = new Assure()
             .codeAssure(DEFAULT_CODE_ASSURE)
             .profil(DEFAULT_PROFIL)
+            .sexe(DEFAULT_SEXE)
             .telephone(DEFAULT_TELEPHONE)
             .createdAt(DEFAULT_CREATED_AT)
             .urlPhoto(DEFAULT_URL_PHOTO)
@@ -94,6 +99,7 @@ public class AssureResourceIT {
         Assure assure = new Assure()
             .codeAssure(UPDATED_CODE_ASSURE)
             .profil(UPDATED_PROFIL)
+            .sexe(UPDATED_SEXE)
             .telephone(UPDATED_TELEPHONE)
             .createdAt(UPDATED_CREATED_AT)
             .urlPhoto(UPDATED_URL_PHOTO)
@@ -122,6 +128,7 @@ public class AssureResourceIT {
         Assure testAssure = assureList.get(assureList.size() - 1);
         assertThat(testAssure.getCodeAssure()).isEqualTo(DEFAULT_CODE_ASSURE);
         assertThat(testAssure.getProfil()).isEqualTo(DEFAULT_PROFIL);
+        assertThat(testAssure.getSexe()).isEqualTo(DEFAULT_SEXE);
         assertThat(testAssure.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
         assertThat(testAssure.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
         assertThat(testAssure.getUrlPhoto()).isEqualTo(DEFAULT_URL_PHOTO);
@@ -173,6 +180,25 @@ public class AssureResourceIT {
         int databaseSizeBeforeTest = assureRepository.findAll().size();
         // set the field null
         assure.setProfil(null);
+
+        // Create the Assure, which fails.
+
+
+        restAssureMockMvc.perform(post("/api/assures")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(assure)))
+            .andExpect(status().isBadRequest());
+
+        List<Assure> assureList = assureRepository.findAll();
+        assertThat(assureList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkSexeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = assureRepository.findAll().size();
+        // set the field null
+        assure.setSexe(null);
 
         // Create the Assure, which fails.
 
@@ -256,6 +282,7 @@ public class AssureResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(assure.getId().intValue())))
             .andExpect(jsonPath("$.[*].codeAssure").value(hasItem(DEFAULT_CODE_ASSURE)))
             .andExpect(jsonPath("$.[*].profil").value(hasItem(DEFAULT_PROFIL.toString())))
+            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE)))
             .andExpect(jsonPath("$.[*].createdAt").value(hasItem(sameInstant(DEFAULT_CREATED_AT))))
             .andExpect(jsonPath("$.[*].urlPhoto").value(hasItem(DEFAULT_URL_PHOTO)))
@@ -275,6 +302,7 @@ public class AssureResourceIT {
             .andExpect(jsonPath("$.id").value(assure.getId().intValue()))
             .andExpect(jsonPath("$.codeAssure").value(DEFAULT_CODE_ASSURE))
             .andExpect(jsonPath("$.profil").value(DEFAULT_PROFIL.toString()))
+            .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE.toString()))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE))
             .andExpect(jsonPath("$.createdAt").value(sameInstant(DEFAULT_CREATED_AT)))
             .andExpect(jsonPath("$.urlPhoto").value(DEFAULT_URL_PHOTO))
@@ -303,6 +331,7 @@ public class AssureResourceIT {
         updatedAssure
             .codeAssure(UPDATED_CODE_ASSURE)
             .profil(UPDATED_PROFIL)
+            .sexe(UPDATED_SEXE)
             .telephone(UPDATED_TELEPHONE)
             .createdAt(UPDATED_CREATED_AT)
             .urlPhoto(UPDATED_URL_PHOTO)
@@ -319,6 +348,7 @@ public class AssureResourceIT {
         Assure testAssure = assureList.get(assureList.size() - 1);
         assertThat(testAssure.getCodeAssure()).isEqualTo(UPDATED_CODE_ASSURE);
         assertThat(testAssure.getProfil()).isEqualTo(UPDATED_PROFIL);
+        assertThat(testAssure.getSexe()).isEqualTo(UPDATED_SEXE);
         assertThat(testAssure.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
         assertThat(testAssure.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testAssure.getUrlPhoto()).isEqualTo(UPDATED_URL_PHOTO);

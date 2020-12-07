@@ -2,7 +2,7 @@
   "firstCaringApp": {
     "profil": {
       "home": {
-        "title": "Profils",
+        "title": "Profil",
         "createLabel": "Créer un nouveau Profil",
         "createOrEditLabel": "Créer ou éditer un Profil",
         "notFound": "Aucun Profil trouvé"
@@ -15,7 +15,21 @@
       },
       "detail": {
         "title": "Profil"
-      }
+      },
+      "codePS": "Code Profil",
+      "profil": "Profil",
+      "sexe": "Sexe",
+      "telephone": "Telephone",
+      "createdAt": "Created At",
+      "urlPhoto": "Url Photo",
+      "profession": "Profession",
+      "experience": "Experience",
+      "nomDeLetablissement": "Nom De Letablissement",
+      "telephoneDeLetablissement": "Telephone De Letablissement",
+      "adresseDeLetablissement": "Adresse De L'etablissement",
+      "lienGoogleMapsDeLetablissement": "Lien Google Maps De L'etablissement",
+      "user": "User",
+      "assure": "Assure"
     }
   }
 }

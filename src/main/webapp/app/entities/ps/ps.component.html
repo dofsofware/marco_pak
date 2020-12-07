@@ -25,6 +25,7 @@
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="codePS"><span jhiTranslate="firstCaringApp.pS.codePS">Code PS</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="profil"><span jhiTranslate="firstCaringApp.pS.profil">Profil</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sexe"><span jhiTranslate="firstCaringApp.pS.sexe">Sexe</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="telephone"><span jhiTranslate="firstCaringApp.pS.telephone">Telephone</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdAt"><span jhiTranslate="firstCaringApp.pS.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="urlPhoto"><span jhiTranslate="firstCaringApp.pS.urlPhoto">Url Photo</span> <fa-icon icon="sort"></fa-icon></th>
@@ -43,6 +44,7 @@
                     <td><a [routerLink]="['/ps', pS.id, 'view']">{{ pS.id }}</a></td>
                     <td>{{ pS.codePS }}</td>
                     <td jhiTranslate="{{ 'firstCaringApp.Profil.' + pS.profil }}">{{ pS.profil }}</td>
+                    <td jhiTranslate="{{ 'firstCaringApp.Sexe.' + pS.sexe }}">{{ pS.sexe }}</td>
                     <td>{{ pS.telephone }}</td>
                     <td>{{ pS.createdAt | date:'medium' }}</td>
                     <td>{{ pS.urlPhoto }}</td>

@@ -15,6 +15,8 @@ import java.util.Set;
 
 import com.techxel.firstcaring.domain.enumeration.Profil;
 
+import com.techxel.firstcaring.domain.enumeration.Sexe;
+
 /**
  * A Assure.
  */
@@ -38,6 +40,11 @@ public class Assure implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "profil", nullable = false)
     private Profil profil;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sexe", nullable = false)
+    private Sexe sexe;
 
     @NotNull
     @Size(min = 7)
@@ -111,6 +118,19 @@ public class Assure implements Serializable {
 
     public void setProfil(Profil profil) {
         this.profil = profil;
+    }
+
+    public Sexe getSexe() {
+        return sexe;
+    }
+
+    public Assure sexe(Sexe sexe) {
+        this.sexe = sexe;
+        return this;
+    }
+
+    public void setSexe(Sexe sexe) {
+        this.sexe = sexe;
     }
 
     public String getTelephone() {
@@ -278,6 +298,7 @@ public class Assure implements Serializable {
             "id=" + getId() +
             ", codeAssure='" + getCodeAssure() + "'" +
             ", profil='" + getProfil() + "'" +
+            ", sexe='" + getSexe() + "'" +
             ", telephone='" + getTelephone() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", urlPhoto='" + getUrlPhoto() + "'" +

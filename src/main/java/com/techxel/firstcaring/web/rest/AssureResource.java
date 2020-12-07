@@ -1,7 +1,10 @@
 package com.techxel.firstcaring.web.rest;
 
 import com.techxel.firstcaring.domain.Assure;
+import com.techxel.firstcaring.domain.User;
+import com.techxel.firstcaring.domain.enumeration.Profil;
 import com.techxel.firstcaring.service.AssureService;
+import com.techxel.firstcaring.service.UserService;
 import com.techxel.firstcaring.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +43,11 @@ public class AssureResource {
     private String applicationName;
 
     private final AssureService assureService;
+    private final UserService userService;
 
-    public AssureResource(AssureService assureService) {
+    public AssureResource(AssureService assureService, UserService userService) {
         this.assureService = assureService;
+        this.userService = userService;
     }
 
     /**
@@ -57,7 +63,17 @@ public class AssureResource {
         if (assure.getId() != null) {
             throw new BadRequestAlertException("A new assure cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        // par moi
+        // -------------------------------------------------------------------------------------------------------
+        
+        final Optional<User> isUser = userService.getUserWithAuthorities();
+        final User user = isUser.get();
+        assure.setUser(user);
+        assure.setProfil(Profil.ASSURE);
+        assure.setCreatedAt(ZonedDateTime.now());
+        // par moi -----------------------------------------------------------------------------------------------
         Assure result = assureService.save(assure);
+        
         return ResponseEntity.created(new URI("/api/assures/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);

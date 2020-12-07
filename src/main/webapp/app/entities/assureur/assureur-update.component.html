@@ -47,6 +47,20 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="firstCaringApp.assureur.sexe" for="field_sexe">Sexe</label>
+                    <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe">
+                        <option value="MASCULIN">{{ 'firstCaringApp.Sexe.MASCULIN' | translate }}</option>
+                        <option value="FEMININ">{{ 'firstCaringApp.Sexe.FEMININ' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('sexe')!.invalid && (editForm.get('sexe')!.dirty || editForm.get('sexe')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sexe')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="firstCaringApp.assureur.telephone" for="field_telephone">Telephone</label>
                     <input type="text" class="form-control" name="telephone" id="field_telephone"
                            formControlName="telephone"/>

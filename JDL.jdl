@@ -13,6 +13,7 @@ entity Facture {
 entity Assureur {
     codeAssureur String required unique minlength(4) maxlength(20),
 	profil Profil required,
+    sexe Sexe required,
 	telephone String required,
     createdAt ZonedDateTime required,
     urlPhoto String,
@@ -22,6 +23,7 @@ entity Assureur {
 entity Assure {
     codeAssure String required unique minlength(4) maxlength(20),
 	profil Profil required,
+    sexe Sexe required,
 	telephone String required minlength(7),
     createdAt ZonedDateTime required,
     urlPhoto String,
@@ -31,6 +33,7 @@ entity Assure {
 entity PS {
     codePS String required unique minlength(4) maxlength(20),
 	profil Profil required,
+    sexe Sexe required,
 	telephone String required,
     createdAt ZonedDateTime required,
     urlPhoto String,
@@ -44,6 +47,11 @@ entity PS {
 
 enum Profil {
     ASSUREUR, ASSURE, PS
+}
+
+
+enum Sexe {
+    MASCULIN, FEMININ
 }
 
 entity RendezVous {

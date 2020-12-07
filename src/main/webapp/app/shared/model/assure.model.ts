@@ -4,11 +4,13 @@ import { IAssureur } from 'app/shared/model/assureur.model';
 import { IPack } from 'app/shared/model/pack.model';
 import { IPS } from 'app/shared/model/ps.model';
 import { Profil } from 'app/shared/model/enumerations/profil.model';
+import { Sexe } from 'app/shared/model/enumerations/sexe.model';
 
 export interface IAssure {
   id?: number;
   codeAssure?: string;
   profil?: Profil;
+  sexe?: Sexe;
   telephone?: string;
   createdAt?: Moment;
   urlPhoto?: string;
@@ -25,6 +27,7 @@ export class Assure implements IAssure {
     public id?: number,
     public codeAssure?: string,
     public profil?: Profil,
+    public sexe?: Sexe,
     public telephone?: string,
     public createdAt?: Moment,
     public urlPhoto?: string,

@@ -13,6 +13,8 @@ import java.util.Set;
 
 import com.techxel.firstcaring.domain.enumeration.Profil;
 
+import com.techxel.firstcaring.domain.enumeration.Sexe;
+
 /**
  * A PS.
  */
@@ -36,6 +38,11 @@ public class PS implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "profil", nullable = false)
     private Profil profil;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sexe", nullable = false)
+    private Sexe sexe;
 
     @NotNull
     @Column(name = "telephone", nullable = false)
@@ -120,6 +127,19 @@ public class PS implements Serializable {
 
     public void setProfil(Profil profil) {
         this.profil = profil;
+    }
+
+    public Sexe getSexe() {
+        return sexe;
+    }
+
+    public PS sexe(Sexe sexe) {
+        this.sexe = sexe;
+        return this;
+    }
+
+    public void setSexe(Sexe sexe) {
+        this.sexe = sexe;
     }
 
     public String getTelephone() {
@@ -301,6 +321,7 @@ public class PS implements Serializable {
             "id=" + getId() +
             ", codePS='" + getCodePS() + "'" +
             ", profil='" + getProfil() + "'" +
+            ", sexe='" + getSexe() + "'" +
             ", telephone='" + getTelephone() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", urlPhoto='" + getUrlPhoto() + "'" +

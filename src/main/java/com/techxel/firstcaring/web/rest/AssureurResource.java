@@ -1,7 +1,10 @@
 package com.techxel.firstcaring.web.rest;
 
 import com.techxel.firstcaring.domain.Assureur;
+import com.techxel.firstcaring.domain.User;
+import com.techxel.firstcaring.domain.enumeration.Profil;
 import com.techxel.firstcaring.service.AssureurService;
+import com.techxel.firstcaring.service.UserService;
 import com.techxel.firstcaring.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +43,11 @@ public class AssureurResource {
     private String applicationName;
 
     private final AssureurService assureurService;
+    private final UserService userService;
 
-    public AssureurResource(AssureurService assureurService) {
+    public AssureurResource(AssureurService assureurService, UserService userService) {
         this.assureurService = assureurService;
+        this.userService = userService;
     }
 
     /**
@@ -57,6 +63,16 @@ public class AssureurResource {
         if (assureur.getId() != null) {
             throw new BadRequestAlertException("A new assureur cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        
+        // par moi
+        // -------------------------------------------------------------------------------------------------------
+        
+        final Optional<User> isUser = userService.getUserWithAuthorities();
+        final User user = isUser.get();
+        assureur.setUser(user);
+        assureur.setProfil(Profil.ASSUREUR);
+        assureur.setCreatedAt(ZonedDateTime.now());
+        // par moi -------------------------------------------------------------------------------------------------------
         Assureur result = assureurService.save(assureur);
         return ResponseEntity.created(new URI("/api/assureurs/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

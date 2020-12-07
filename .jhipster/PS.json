@@ -22,6 +22,14 @@
       ]
     },
     {
+      "fieldName": "sexe",
+      "fieldType": "Sexe",
+      "fieldValues": "MASCULIN,FEMININ",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
       "fieldName": "telephone",
       "fieldType": "String",
       "fieldValidateRules": [

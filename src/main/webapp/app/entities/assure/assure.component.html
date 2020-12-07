@@ -25,6 +25,7 @@
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="codeAssure"><span jhiTranslate="firstCaringApp.assure.codeAssure">Code Assure</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="profil"><span jhiTranslate="firstCaringApp.assure.profil">Profil</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sexe"><span jhiTranslate="firstCaringApp.assure.sexe">Sexe</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="telephone"><span jhiTranslate="firstCaringApp.assure.telephone">Telephone</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="createdAt"><span jhiTranslate="firstCaringApp.assure.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="urlPhoto"><span jhiTranslate="firstCaringApp.assure.urlPhoto">Url Photo</span> <fa-icon icon="sort"></fa-icon></th>
@@ -40,6 +41,7 @@
                     <td><a [routerLink]="['/assure', assure.id, 'view']">{{ assure.id }}</a></td>
                     <td>{{ assure.codeAssure }}</td>
                     <td jhiTranslate="{{ 'firstCaringApp.Profil.' + assure.profil }}">{{ assure.profil }}</td>
+                    <td jhiTranslate="{{ 'firstCaringApp.Sexe.' + assure.sexe }}">{{ assure.sexe }}</td>
                     <td>{{ assure.telephone }}</td>
                     <td>{{ assure.createdAt | date:'medium' }}</td>
                     <td>{{ assure.urlPhoto }}</td>
