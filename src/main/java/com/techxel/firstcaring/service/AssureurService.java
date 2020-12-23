@@ -50,4 +50,6 @@ public interface AssureurService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+	Page<Assureur> getAllAssureursByCurrentUser(Pageable pageable);
 }

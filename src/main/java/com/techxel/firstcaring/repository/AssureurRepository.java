@@ -26,4 +26,7 @@ public interface AssureurRepository extends JpaRepository<Assureur, Long> {
 
     @Query("select assureur from Assureur assureur left join fetch assureur.assures where assureur.id =:id")
     Optional<Assureur> findOneWithEagerRelationships(@Param("id") Long id);
+
+    @Query("select assureur from Assureur assureur where assureur.user.login = ?#{principal.username}")
+    Page<Assureur> findAllByCurrentUser(Pageable pageable);
 }

@@ -54,4 +54,19 @@ public class AssureServiceImpl implements AssureService {
         log.debug("Request to delete Assure : {}", id);
         assureRepository.deleteById(id);
     }
+
+    @Override
+    public Page<Assure> findAllByCurrentUser(Pageable pageable) {
+        return assureRepository.findAllByCurrentUser(pageable);
+    }
+
+    @Override
+    public Page<Assure> findAllByIdAssureur(Pageable pageable, Long idAssureur) {
+        return assureRepository.findAllByIdAssureur(pageable,idAssureur);
+    }
+
+    @Override
+    public Page<Assure> getAllAssuresByCode(Pageable pageable, String codeAssure) {
+        return assureRepository.getAllAssuresByCode(pageable,codeAssure);
+    }
 }

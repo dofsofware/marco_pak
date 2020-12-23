@@ -58,4 +58,10 @@ public class PSServiceImpl implements PSService {
         log.debug("Request to delete PS : {}", id);
         pSRepository.deleteById(id);
     }
+
+    @Override
+    public Page<PS> getAllPSByCurrentUser(Pageable pageable) {
+        
+        return pSRepository.findAllByCurrentUser(pageable);
+    }
 }

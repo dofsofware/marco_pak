@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -53,5 +54,11 @@ public class FactureServiceImpl implements FactureService {
     public void delete(Long id) {
         log.debug("Request to delete Facture : {}", id);
         factureRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Facture> findAllByIdAssureur(Pageable pageable, Long idAssureur) {
+
+        return factureRepository.findAllByIdAssureur(pageable,idAssureur);
     }
 }

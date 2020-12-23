@@ -23,6 +23,9 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { Profil } from 'app/shared/model/enumerations/profil.model';
 import { IPack } from 'app/shared/model/pack.model';
 import { PackService } from '../pack/pack.service';
+import { PSService } from '../ps/ps.service';
+import { IPS, PS } from 'app/shared/model/ps.model';
+import { AssureDeleteDialogComponent } from '../assure/assure-delete-dialog.component';
 
 type SelectableEntity = IUser | IAssure;
 
@@ -34,9 +37,13 @@ export class ProfilComponent implements OnInit, OnDestroy {
   account!: Account;
   success = false;
   languages = LANGUAGES;
+  profilEncours: string;
+  profilIncomplet: boolean;
+  recherche: boolean;
 
   // facture
   factures: IFacture[];
+  facturesByAssureurEncours: IFacture[];
   eventSubscriber?: Subscription;
   itemsPerPage: number;
   links: any;
@@ -44,15 +51,25 @@ export class ProfilComponent implements OnInit, OnDestroy {
   predicate: string;
   profil: string;
   ascending: boolean;
+  selectedOption: number;
 
   // Assureur
   isSaving = false;
   users: IUser[] = [];
   assures: IAssure[] = [];
+  assureursByCurrentUser: IAssureur[] = [];
 
   // Assuré(e)
   assureurs: IAssureur[] = [];
   packs: IPack[] = [];
+  assuresByCurrentUser: IAssure[] = [];
+  assuresByAssureurEncours: IAssure[] = [];
+  Assuresrecherche: IAssure[] = [];
+  codeAssureRecherche: string;
+
+  // PERSONNEL DE SANTE
+  PS: IPS[] = [];
+  PSByCurrentUser: IPS[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -63,6 +80,24 @@ export class ProfilComponent implements OnInit, OnDestroy {
     createdAt: [],
     urlPhoto: [],
     adresse: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
+    user: [],
+    assures: [],
+  });
+
+  editFormPS = this.fb.group({
+    id: [],
+    codePS: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(20), this.codePSValidator.bind(this)]],
+    profil: [],
+    sexe: [null, [Validators.required]],
+    telephone: [null, [Validators.required]],
+    createdAt: [],
+    urlPhoto: [],
+    profession: [null, [Validators.required, Validators.minLength(4)]],
+    experience: [null, [Validators.required, Validators.max(30)]],
+    nomDeLetablissement: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
+    telephoneDeLetablissement: [null, [Validators.required]],
+    adresseDeLetablissement: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
+    lienGoogleMapsDeLetablissement: [null, [Validators.minLength(100), Validators.maxLength(600)]],
     user: [],
     assures: [],
   });
@@ -90,6 +125,7 @@ export class ProfilComponent implements OnInit, OnDestroy {
 
   constructor(
     protected assureurService: AssureurService,
+    protected pSService: PSService,
     protected userService: UserService,
     protected assureService: AssureService,
     protected activatedRoute: ActivatedRoute,
@@ -103,7 +139,15 @@ export class ProfilComponent implements OnInit, OnDestroy {
     protected parseLinks: JhiParseLinks,
     private router: Router
   ) {
+    this.profilIncomplet = false;
+    this.recherche = false;
+    this.profilEncours = '';
+    this.codeAssureRecherche = '';
+    this.selectedOption = 1;
     this.factures = [];
+    this.facturesByAssureurEncours = [];
+    this.assuresByAssureurEncours = [];
+    this.assures = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
     this.page = 0;
     this.links = {
@@ -125,8 +169,6 @@ export class ProfilComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadAll();
-    this.registerChangeInFactures();
     // this.activatedRoute.data.subscribe(({ assure }) => {
     //   if (!assure.id) {
     //     const today = moment().startOf('day');
@@ -162,14 +204,89 @@ export class ProfilComponent implements OnInit, OnDestroy {
           email: account.email,
           langKey: account.langKey,
         });
-
+        this.assureurService
+          .getAllAssureursByCurrentUser({ page: this.page, size: this.itemsPerPage, sort: this.sort() })
+          .subscribe((res: HttpResponse<IAssureur[]>) => this.paginateAssureurs(res.body, res.headers));
+        // this.assureurService.getAllAssureursByCurrentUser().subscribe((res: HttpResponse<IAssureur[]>) => (this.assureursByCurrentUser = res.body || []));
+        this.pSService
+          .getAllPSByCurrentUser()
+          .subscribe(
+            (res: HttpResponse<IPS[]>) => ((this.profilIncomplet = this.gestionProfilEncore()), (this.PSByCurrentUser = res.body || []))
+          );
+        this.assureService
+          .getAllAssuresByCurrentUser()
+          .subscribe(
+            (res: HttpResponse<IAssure[]>) => (
+              (this.profilIncomplet = this.gestionProfilEncore()), (this.assuresByCurrentUser = res.body || [])
+            )
+          );
         this.account = account;
-        this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
-        this.assureService.query().subscribe((res: HttpResponse<IAssure[]>) => (this.assures = res.body || []));
-        this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
-        this.assureurService.query().subscribe((res: HttpResponse<IAssureur[]>) => (this.assureurs = res.body || []));
-        this.packService.query().subscribe((res: HttpResponse<IPack[]>) => (this.packs = res.body || []));
+        this.userService
+          .query()
+          .subscribe((res: HttpResponse<IUser[]>) => ((this.profilIncomplet = this.gestionProfilEncore()), (this.users = res.body || [])));
+        this.assureService
+          .query()
+          .subscribe(
+            (res: HttpResponse<IAssure[]>) => ((this.profilIncomplet = this.gestionProfilEncore()), (this.assures = res.body || []))
+          );
+        this.userService
+          .query()
+          .subscribe((res: HttpResponse<IUser[]>) => ((this.profilIncomplet = this.gestionProfilEncore()), (this.users = res.body || [])));
+        this.assureurService
+          .query()
+          .subscribe(
+            (res: HttpResponse<IAssureur[]>) => ((this.profilIncomplet = this.gestionProfilEncore()), (this.assureurs = res.body || []))
+          );
+        this.packService
+          .query()
+          .subscribe((res: HttpResponse<IPack[]>) => ((this.profilIncomplet = this.gestionProfilEncore()), (this.packs = res.body || [])));
+        this.pSService
+          .query()
+          .subscribe((res: HttpResponse<IPS[]>) => ((this.profilIncomplet = this.gestionProfilEncore()), (this.PS = res.body || [])));
+        // this.profilComplet = this.gestionProfilEncore();
       }
+    });
+
+    this.loadAllFacture();
+    this.registerChangeInFactures();
+    this.registerChangeInAssures();
+
+    //
+  }
+
+  gestionProfilEncore(): boolean {
+    this.loadAllAssuresByIdAssureur();
+    this.loadAllFactureByIdAssureur();
+    if (this.assuresByCurrentUser?.length === 1) {
+      this.profilEncours = 'ASSURE';
+      return false;
+    } else if (this.assureursByCurrentUser?.length === 1) {
+      this.profilEncours = 'ASSUREUR';
+      return false;
+    } else if (this.PSByCurrentUser?.length === 1) {
+      this.profilEncours = 'PS';
+      return false;
+    }
+    return true;
+  }
+
+  updateFormPS(pS: IPS): void {
+    this.editFormPS.patchValue({
+      id: pS.id,
+      codePS: pS.codePS,
+      profil: pS.profil,
+      sexe: pS.sexe,
+      telephone: pS.telephone,
+      createdAt: pS.createdAt ? pS.createdAt.format(DATE_TIME_FORMAT) : null,
+      urlPhoto: pS.urlPhoto,
+      profession: pS.profession,
+      experience: pS.experience,
+      nomDeLetablissement: pS.nomDeLetablissement,
+      telephoneDeLetablissement: pS.telephoneDeLetablissement,
+      adresseDeLetablissement: pS.adresseDeLetablissement,
+      lienGoogleMapsDeLetablissement: pS.lienGoogleMapsDeLetablissement,
+      user: pS.user,
+      assures: pS.assures,
     });
   }
 
@@ -189,6 +306,16 @@ export class ProfilComponent implements OnInit, OnDestroy {
     });
   }
 
+  savePS(): void {
+    this.isSaving = true;
+    const pS = this.createFromFormPS();
+    if (pS.id !== undefined) {
+      this.subscribeToSaveResponsePS(this.pSService.update(pS));
+    } else {
+      this.subscribeToSaveResponsePS(this.pSService.create(pS));
+    }
+  }
+
   saveAssure(): void {
     this.isSaving = true;
     const assure = this.createFromFormAssure();
@@ -197,6 +324,43 @@ export class ProfilComponent implements OnInit, OnDestroy {
     } else {
       this.subscribeToSaveResponseAssure(this.assureService.create(assure));
     }
+  }
+
+  private createFromForm(): IAssureur {
+    return {
+      ...new Assureur(),
+      id: undefined,
+      codeAssureur: this.editForm.get(['codeAssureur'])!.value,
+      profil: Profil.ASSUREUR,
+      sexe: this.editForm.get(['sexe'])!.value,
+      telephone: this.editForm.get(['telephone'])!.value,
+      createdAt: moment(moment().format(DATE_TIME_FORMAT)),
+      urlPhoto: this.editForm.get(['urlPhoto'])!.value,
+      adresse: this.editForm.get(['adresse'])!.value,
+      user: this.editForm.get(['user'])!.value,
+      assures: this.editForm.get(['assures'])!.value,
+    };
+  }
+
+  private createFromFormPS(): IPS {
+    return {
+      ...new PS(),
+      id: undefined,
+      codePS: this.editFormPS.get(['codePS'])!.value,
+      profil: Profil.PS,
+      sexe: this.editFormPS.get(['sexe'])!.value,
+      telephone: this.editFormPS.get(['telephone'])!.value,
+      createdAt: moment(moment().format(DATE_TIME_FORMAT)),
+      urlPhoto: this.editFormPS.get(['urlPhoto'])!.value,
+      profession: this.editFormPS.get(['profession'])!.value,
+      experience: this.editFormPS.get(['experience'])!.value,
+      nomDeLetablissement: this.editFormPS.get(['nomDeLetablissement'])!.value,
+      telephoneDeLetablissement: this.editFormPS.get(['telephoneDeLetablissement'])!.value,
+      adresseDeLetablissement: this.editFormPS.get(['adresseDeLetablissement'])!.value,
+      lienGoogleMapsDeLetablissement: this.editFormPS.get(['lienGoogleMapsDeLetablissement'])!.value,
+      user: this.editFormPS.get(['user'])!.value,
+      assures: this.editFormPS.get(['assures'])!.value,
+    };
   }
 
   private createFromFormAssure(): IAssure {
@@ -244,23 +408,15 @@ export class ProfilComponent implements OnInit, OnDestroy {
       this.subscribeToSaveResponse(this.assureurService.create(assureur));
     }
   }
-  private createFromForm(): IAssureur {
-    return {
-      ...new Assureur(),
-      id: undefined,
-      codeAssureur: this.editForm.get(['codeAssureur'])!.value,
-      profil: Profil.ASSUREUR,
-      sexe: this.editForm.get(['sexe'])!.value,
-      telephone: this.editForm.get(['telephone'])!.value,
-      createdAt: moment(moment().format(DATE_TIME_FORMAT)),
-      urlPhoto: this.editForm.get(['urlPhoto'])!.value,
-      adresse: this.editForm.get(['adresse'])!.value,
-      user: this.editForm.get(['user'])!.value,
-      assures: this.editForm.get(['assures'])!.value,
-    };
-  }
 
   protected subscribeToSaveResponseAssure(result: Observable<HttpResponse<IAssure>>): void {
+    result.subscribe(
+      () => this.onSaveSuccess(),
+      () => this.onSaveError()
+    );
+  }
+
+  protected subscribeToSaveResponsePS(result: Observable<HttpResponse<IPS>>): void {
     result.subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -285,6 +441,19 @@ export class ProfilComponent implements OnInit, OnDestroy {
 
   trackById(index: number, item: SelectableEntity): any {
     return item.id;
+  }
+
+  deleteAssure(assure: IAssure): void {
+    const modalRef = this.modalService.open(AssureDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.assure = assure;
+  }
+
+  sortAssure(): string[] {
+    const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
+    if (this.predicate !== 'id') {
+      result.push('id');
+    }
+    return result;
   }
 
   getSelected(selectedVals: IAssure[], option: IAssure): IAssure {
@@ -319,7 +488,7 @@ export class ProfilComponent implements OnInit, OnDestroy {
 
   // facture
 
-  loadAll(): void {
+  loadAllFacture(): void {
     this.factureService
       .query({
         page: this.page,
@@ -329,15 +498,62 @@ export class ProfilComponent implements OnInit, OnDestroy {
       .subscribe((res: HttpResponse<IFacture[]>) => this.paginateFactures(res.body, res.headers));
   }
 
+  loadAllAssuresByIdAssureur(): void {
+    if (this.assureursByCurrentUser[0]?.id !== undefined) {
+      this.assureService
+        .findAllByIdAssureur(this.assureursByCurrentUser[0]?.id)
+        .subscribe((res: HttpResponse<IAssure[]>) => this.paginateAssures(res.body, res.headers));
+    }
+  }
+
+  resetAssures(): void {
+    this.page = 0;
+    this.assures = [];
+    this.loadAllAssuresByIdAssureur();
+  }
+
+  loadAllFactureByIdAssureur(): void {
+    if (this.assureursByCurrentUser[0]?.id !== undefined) {
+      this.factureService
+        .findAllByIdAssureur(this.assureursByCurrentUser[0]?.id)
+        .subscribe((res: HttpResponse<IFacture[]>) => this.paginateFacturesByAssureurEncours(res.body, res.headers));
+    }
+  }
+
+  registerChangeInAssures(): void {
+    this.eventSubscriber = this.eventManager.subscribe('assureListModification', () => this.reset());
+  }
+
+  // ASSURE
+  // getAllAssuresByCurrentUser(): void {
+  //   this.assureService
+  //     .getAllAssuresByCurrentUser({
+  //       page: this.page,
+  //       size: this.itemsPerPage,
+  //       sort: this.sort(),
+  //     })
+  //     .subscribe((res: HttpResponse<IAssure[]>) => this.paginateAssures(res.body, res.headers));
+  // }
+
   reset(): void {
     this.page = 0;
     this.factures = [];
-    this.loadAll();
+    this.facturesByAssureurEncours = [];
+    this.assuresByAssureurEncours = [];
+    this.loadAllFacture();
+    this.loadAllFactureByIdAssureur();
   }
 
   loadPage(page: number): void {
     this.page = page;
-    this.loadAll();
+    this.loadAllFacture();
+    this.loadAllFactureByIdAssureur();
+    this.loadAllAssuresByIdAssureur();
+  }
+
+  trackIdAssure(index: number, item: IAssure): number {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    return item.id!;
   }
 
   trackId(index: number, item: IFacture): number {
@@ -371,6 +587,50 @@ export class ProfilComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  protected paginateFacturesByAssureurEncours(data: IFacture[] | null, headers: HttpHeaders): void {
+    const headersLink = headers.get('link');
+    this.facturesByAssureurEncours = [];
+    this.links = this.parseLinks.parse(headersLink ? headersLink : '');
+    if (data) {
+      for (let i = 0; i < data.length; i++) {
+        this.facturesByAssureurEncours.push(data[i]);
+      }
+    }
+  }
+
+  protected paginateAssures(data: IAssure[] | null, headers: HttpHeaders): void {
+    const headersLink = headers.get('link');
+    this.assuresByAssureurEncours = [];
+    this.links = this.parseLinks.parse(headersLink ? headersLink : '');
+    if (data) {
+      for (let i = 0; i < data.length; i++) {
+        this.assuresByAssureurEncours.push(data[i]);
+      }
+    }
+  }
+  protected paginateAssuresrecherche(data: IAssure[] | null, headers: HttpHeaders): void {
+    const headersLink = headers.get('link');
+    this.Assuresrecherche = [];
+    this.links = this.parseLinks.parse(headersLink ? headersLink : '');
+    if (data) {
+      for (let i = 0; i < data.length; i++) {
+        this.Assuresrecherche.push(data[i]);
+      }
+    }
+  }
+
+  protected paginateAssureurs(data: IAssureur[] | null, headers: HttpHeaders): void {
+    const headersLink = headers.get('link');
+    this.links = this.parseLinks.parse(headersLink ? headersLink : '');
+    this.profilIncomplet = this.gestionProfilEncore();
+    if (data) {
+      for (let i = 0; i < data.length; i++) {
+        this.assureursByCurrentUser.push(data[i]);
+      }
+    }
+  }
+
   codeAssureValidator(control: AbstractControl): { [key: string]: any } | null {
     const codeAssure: string = control.value;
     if (codeAssure !== null) {
@@ -385,6 +645,33 @@ export class ProfilComponent implements OnInit, OnDestroy {
     return null;
   }
 
+  rechercheAssure(): void {
+    if (this.codeAssureRecherche !== undefined) {
+      this.Assuresrecherche = [];
+      if (this.codeAssureRecherche.length > 0) {
+        this.recherche = true;
+      }
+
+      this.assureService
+        .findAllByCode(this.codeAssureRecherche)
+        .subscribe((res: HttpResponse<IAssure[]>) => this.paginateAssuresrecherche(res.body, res.headers));
+    }
+  }
+
+  OptionSelectionne(event: any): void {
+    this.selectedOption = event.target.value;
+  }
+
+  EnregistrerAssureRecherche(): void {
+    if (this.Assuresrecherche[0]?.pack?.id !== undefined) {
+      this.Assuresrecherche[0].pack.id = this.selectedOption;
+    } else {
+      this.Assuresrecherche[0].pack = this.packs[this.selectedOption - 1];
+    }
+    this.Assuresrecherche[0].assureur = this.assureursByCurrentUser[0];
+    this.subscribeToSaveResponseAssure(this.assureService.update(this.Assuresrecherche[0]));
+  }
+
   codeAssureurValidator(control: AbstractControl): { [key: string]: any } | null {
     const codeAssureur: string = control.value;
     if (codeAssureur !== null) {
@@ -392,6 +679,20 @@ export class ProfilComponent implements OnInit, OnDestroy {
         for (let i = 0; i < this.assureurs.length; i++) {
           if (this.assureurs[i].codeAssureur === codeAssureur) {
             return { codeAssureur: true };
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  codePSValidator(control: AbstractControl): { [key: string]: any } | null {
+    const codePS: string = control.value;
+    if (codePS !== null) {
+      if (codePS !== '' && codePS.length >= 4) {
+        for (let i = 0; i < this.PS.length; i++) {
+          if (this.PS[i].codePS === codePS) {
+            return { codePS: true };
           }
         }
       }

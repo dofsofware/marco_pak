@@ -58,4 +58,9 @@ public class AssureurServiceImpl implements AssureurService {
         log.debug("Request to delete Assureur : {}", id);
         assureurRepository.deleteById(id);
     }
+
+    @Override
+    public Page<Assureur> getAllAssureursByCurrentUser(Pageable pageable) {
+        return assureurRepository.findAllByCurrentUser(pageable);
+    }
 }

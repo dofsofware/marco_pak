@@ -113,6 +113,51 @@ public class AssureResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+    
+    /**
+     * {@code GET  /assures} : get all the assures.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of assures in body.
+     */
+    @GetMapping("/assures/getAllAssuresByCurrentUser")
+    public ResponseEntity<List<Assure>> getAllAssuresByCurrentUser(Pageable pageable) {
+        log.debug("REST request to get a page of Assures");
+        Page<Assure> page = assureService.findAllByCurrentUser(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    
+    
+    /**
+     * {@code GET  /assures} : get all the assures.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of assures in body.
+     */
+    @GetMapping("/assures/findAllByIdAssureur/{IdAssureur}")
+    public ResponseEntity<List<Assure>> getAllAssuresByIdAssureur(Pageable pageable, @PathVariable Long IdAssureur) {
+        log.debug("REST request to get a page of Assures");
+        Page<Assure> page = assureService.findAllByIdAssureur(pageable, IdAssureur);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+    
+    
+    /**
+     * {@code GET  /assures} : get all the assures.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of assures in body.
+     */
+    @GetMapping("/assures/getAllAssuresByCode/{codeAssure}")
+    public ResponseEntity<List<Assure>> getAllAssuresByCode(Pageable pageable, @PathVariable String codeAssure) {
+        log.debug("REST request to get a page of Assures");
+        Page<Assure> page = assureService.getAllAssuresByCode(pageable, codeAssure);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
 
     /**
      * {@code GET  /assures/:id} : get the "id" assure.

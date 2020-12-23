@@ -110,6 +110,21 @@ public class FactureResource {
         Optional<Facture> facture = factureService.findOne(id);
         return ResponseUtil.wrapOrNotFound(facture);
     }
+        
+
+    /**
+     * {@code GET  /factures} : get all the factures.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of factures in body.
+     */
+    @GetMapping("/factures/findAllByIdAssureur/{IdAssureur}")
+    public ResponseEntity<List<Facture>> getFactureByIdAssureur(Pageable pageable, @PathVariable Long IdAssureur) {
+        log.debug("REST request to get a page of Factures");
+        Page<Facture> page = factureService.findAllByIdAssureur(pageable, IdAssureur);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
 
     /**
      * {@code DELETE  /factures/:id} : delete the "id" facture.

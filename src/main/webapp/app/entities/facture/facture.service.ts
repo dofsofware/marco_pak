@@ -37,6 +37,12 @@ export class FactureService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findAllByIdAssureur(id: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IFacture[]>(`${this.resourceUrl}/findAllByIdAssureur/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http

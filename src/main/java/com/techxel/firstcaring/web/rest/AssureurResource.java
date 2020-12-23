@@ -121,6 +121,26 @@ public class AssureurResource {
     }
 
     /**
+     * {@code GET  /assureurs} : get all the assureurs.
+     *
+     * @param pageable the pagination information.
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of assureurs in body.
+     */
+    @GetMapping("/assureurs/getAllAssureursByCurrentUser")
+    public ResponseEntity<List<Assureur>> getAllAssureursByCurrentUser(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        log.debug("REST request to get a page of Assureurs");
+        Page<Assureur> page;
+        if (eagerload) {
+            page = assureurService.findAllWithEagerRelationships(pageable);
+        } else {
+            page = assureurService.getAllAssureursByCurrentUser(pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
      * {@code GET  /assureurs/:id} : get the "id" assureur.
      *
      * @param id the id of the assureur to retrieve.

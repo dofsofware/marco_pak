@@ -61,8 +61,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   login(): void {
     this.loginModalService.open();
-    // eslint-disable-next-line no-console
-    console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' + window.scrollX + '/' + window.scrollY);
   }
 
   logout(): void {

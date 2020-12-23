@@ -50,4 +50,6 @@ public interface PSService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+	Page<PS> getAllPSByCurrentUser(Pageable pageable);
 }

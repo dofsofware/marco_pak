@@ -26,4 +26,7 @@ public interface PSRepository extends JpaRepository<PS, Long> {
 
     @Query("select pS from PS pS left join fetch pS.assures where pS.id =:id")
     Optional<PS> findOneWithEagerRelationships(@Param("id") Long id);
+
+    @Query("select pS from PS pS where pS.user.login = ?#{principal.username}")
+    Page<PS> findAllByCurrentUser(Pageable pageable);
 }

@@ -43,4 +43,10 @@ public interface AssureService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+	Page<Assure> findAllByCurrentUser(Pageable pageable);
+
+	Page<Assure> findAllByIdAssureur(Pageable pageable, Long idAssureur);
+
+	Page<Assure> getAllAssuresByCode(Pageable pageable, String codeAssure);
 }

@@ -1,7 +1,10 @@
 package com.techxel.firstcaring.web.rest;
 
 import com.techxel.firstcaring.domain.PS;
+import com.techxel.firstcaring.domain.User;
+import com.techxel.firstcaring.domain.enumeration.Profil;
 import com.techxel.firstcaring.service.PSService;
+import com.techxel.firstcaring.service.UserService;
 import com.techxel.firstcaring.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +43,11 @@ public class PSResource {
     private String applicationName;
 
     private final PSService pSService;
+    private final UserService userService;
 
-    public PSResource(PSService pSService) {
+    public PSResource(PSService pSService, UserService userService) {
         this.pSService = pSService;
+        this.userService = userService; 
     }
 
     /**
@@ -57,6 +63,15 @@ public class PSResource {
         if (pS.getId() != null) {
             throw new BadRequestAlertException("A new pS cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        // par moi
+        // -------------------------------------------------------------------------------------------------------
+        
+        final Optional<User> isUser = userService.getUserWithAuthorities();
+        final User user = isUser.get();
+        pS.setUser(user);
+        pS.setProfil(Profil.PS);
+        pS.setCreatedAt(ZonedDateTime.now());
+        // par moi -----------------------------------------------------------------------------------------------
         PS result = pSService.save(pS);
         return ResponseEntity.created(new URI("/api/ps/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -99,6 +114,26 @@ public class PSResource {
             page = pSService.findAllWithEagerRelationships(pageable);
         } else {
             page = pSService.findAll(pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /ps} : get all the pS.
+     *
+     * @param pageable the pagination information.
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pS in body.
+     */
+    @GetMapping("/ps/getAllPSByCurrentUser")
+    public ResponseEntity<List<PS>> getAllPSByCurrentUser(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        log.debug("REST request to get a page of PS");
+        Page<PS> page;
+        if (eagerload) {
+            page = pSService.findAllWithEagerRelationships(pageable);
+        } else {
+            page = pSService.getAllPSByCurrentUser(pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

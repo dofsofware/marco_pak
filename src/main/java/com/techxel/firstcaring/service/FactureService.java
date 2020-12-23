@@ -43,4 +43,6 @@ public interface FactureService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+	Page<Facture> findAllByIdAssureur(Pageable pageable, Long idAssureur);
 }

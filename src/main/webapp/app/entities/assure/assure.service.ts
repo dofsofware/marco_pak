@@ -37,10 +37,29 @@ export class AssureService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findAllByIdAssureur(id: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IAssure[]>(`${this.resourceUrl}/findAllByIdAssureur/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  findAllByCode(codeAssure: string): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IAssure[]>(`${this.resourceUrl}/getAllAssuresByCode/${codeAssure}`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
       .get<IAssure[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  getAllAssuresByCurrentUser(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IAssure[]>(`${this.resourceUrl}/getAllAssuresByCurrentUser`, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
