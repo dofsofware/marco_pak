@@ -43,4 +43,6 @@ public interface RapportSoignantService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+	Page<RapportSoignant> getAllRapportSoignantsByCode(Pageable pageable, String codePatient);
 }

@@ -54,4 +54,9 @@ public class RapportSoignantServiceImpl implements RapportSoignantService {
         log.debug("Request to delete RapportSoignant : {}", id);
         rapportSoignantRepository.deleteById(id);
     }
+
+    @Override
+    public Page<RapportSoignant> getAllRapportSoignantsByCode(Pageable pageable, String codePatient) {
+        return rapportSoignantRepository.getAllRapportSoignantsByCode(pageable,codePatient);
+    }
 }

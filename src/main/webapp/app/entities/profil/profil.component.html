@@ -670,6 +670,7 @@
     </div>
 
     <div class="col-lg-12" *ngIf="profilEncours ==='ASSUREUR'">
+      <!-- ACCUEIL ASSUREUR -->
       <div class="accordion mt-5" id="accordionExample">
         <div class="card">
           <div class="card-header" id="headingOne" type="button" data-toggle="collapse" data-target="#collapseOne"
@@ -1006,21 +1007,21 @@
                 <div class="row">
                   <div class="col-md-4">
                     <input type="radio" id="control_01" name="select" value="1" checked>
-                    <label for="control_01">
+                    <label class="lab"  for="control_01">
                       <h2>pack1</h2>
                       <p>Awww, poor baby. Too afraid of the scary game sprites? I laugh at you.</p>
                     </label>
                   </div>
                   <div class="col-md-4">
                     <input type="radio" id="control_02" name="select" value="2">
-                    <label for="control_02">
+                    <label class="lab" for="control_02">
                       <h2>pack2</h2>
                       <p>You're not a gaming God by any stretch of the imagination.</p>
                     </label>
                   </div>
                   <div class="col-md-4">
                     <input type="radio" id="control_03" name="select" value="3">
-                    <label for="control_03">
+                    <label class="lab"  for="control_03">
                       <h2>pack3</h2>
                       <p>Now we're talking. It's gettin' a bit hairy out there in game land.</p>
                     </label>
@@ -1054,6 +1055,53 @@
           </div>
         </div>
       </div>
+      <!-- ACCUEIL ASSUREUR -->
+    </div>
+    <div class="col-lg-12" *ngIf="profilEncours ==='ASSURE'">
+      <!-- ACCUEIL ASSURE -->
+      <div class="accordion mt-5" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne" type="button" data-toggle="collapse" data-target="#collapseOne"
+            aria-expanded="false" aria-controls="collapseOne">
+            <h2 class="clearfix mb-0">
+              <span>Historique de mes soins</span>
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                <i class="fa fa-plus-circle"></i>
+              </button>
+            </h2>
+          </div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <!-- Assuré historique des soins -->
+            
+            <!-- http://localhost:8080/api/rapport-soignants/getAllRapportSoignantsByCode/cyan -->
+            <!-- Assuré historique des soins -->
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo" type="button" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="false" aria-controls="collapseTwo">
+            <h2 class="mb-0">
+              <span>Rendez-vous</span>
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="false" aria-controls="collapseTwo">
+                <i class="fa fa-plus-circle"></i>
+              </button>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+              <!-- Assure rendez-vous -->
+              zerfdsf
+              dfdfdfdsfdf
+              dsfdfdf
+              dfdfdf              
+              <!-- Assure rendez-vous -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ACCUEIL ASSURE -->
     </div>
   </div>
 </div>

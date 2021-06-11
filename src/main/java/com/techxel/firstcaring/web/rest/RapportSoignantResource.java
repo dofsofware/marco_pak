@@ -98,6 +98,21 @@ public class RapportSoignantResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    
+    /**
+     * {@code GET  /rapport-soignants} : get all the rapportSoignants.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rapportSoignants in body.
+     */
+    @GetMapping("/rapport-soignants/getAllRapportSoignantsByCode/{codePatient}")
+    public ResponseEntity<List<RapportSoignant>> getAllRapportSoignantsByCode(Pageable pageable, @PathVariable String codePatient) {
+        log.debug("REST request to get a page of RapportSoignants");
+        Page<RapportSoignant> page = rapportSoignantService.getAllRapportSoignantsByCode(pageable, codePatient);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
     /**
      * {@code GET  /rapport-soignants/:id} : get the "id" rapportSoignant.
      *
