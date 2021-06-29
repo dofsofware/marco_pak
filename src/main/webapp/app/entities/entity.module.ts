@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthentificationComponent } from 'app/authentification/authentification.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
+      { path: 'authentification', component: AuthentificationComponent },
       {
         path: 'pack',
         loadChildren: () => import('./pack/pack.module').then(m => m.FirstCaringPackModule),

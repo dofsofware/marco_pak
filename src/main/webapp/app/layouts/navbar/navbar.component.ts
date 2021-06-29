@@ -60,7 +60,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   login(): void {
-    this.loginModalService.open();
+    // this.loginModalService.open();
+    this.router.navigate(['/authentification']);
   }
 
   logout(): void {
